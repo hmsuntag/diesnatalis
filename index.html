@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Aman & Gratis</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- SCRIPT PENGAMAN HALAMAN -->
+    <script>
+        // 1. Memblokir Klik Kanan
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            alert('Aksi klik kanan dinonaktifkan.');
+        });
+
+        // 2. Memblokir Tombol Pintas Pembuka Inspector & View Source
+        document.addEventListener('keydown', function(e) {
+            // Blokir F12, Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+            if (
+                e.key === 'F12' || 
+                (e.ctrlKey && e.key === 'U') || 
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C'))
+            ) {
+                e.preventDefault();
+                alert('Akses inspeksi kode sumber dibatasi!');
+                return false;
+            }
+        });
+
+        // 3. Deteksi jika Developer Tools Terbuka (Opsional, mengamankan halaman)
+        setInterval(function() {
+            const threshold = 160;
+            if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
+                document.body.innerHTML = "<h2 style='text-align:center; margin-top:35vh; font-family:sans-serif; color:red;'>Akses Ditolak: Developer Tools terdeteksi!</h2>";
+            }
+        }, 1000);
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Selamat Datang di Website Saya</h1>
+        <p>Website ini dilindungi dari tindakan salin kode sembarangan.</p>
+        <button id="cta-btn">Klik Saya</button>
+    </div>
+
+    <!-- Panggil script yang sudah diamankan -->
+    <script src="script.js"></script>
+</body>
+</html>
