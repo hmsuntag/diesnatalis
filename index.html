@@ -3,49 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Aman & Gratis</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Pendaftaran Dies Natalis HMS UNTAG Samarinda</title>
 
-    <!-- SCRIPT PENGAMAN HALAMAN -->
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        // 1. Memblokir Klik Kanan
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-            alert('Aksi klik kanan dinonaktifkan.');
-        });
-
-        // 2. Memblokir Tombol Pintas Pembuka Inspector & View Source
-        document.addEventListener('keydown', function(e) {
-            // Blokir F12, Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
-            if (
-                e.key === 'F12' || 
-                (e.ctrlKey && e.key === 'U') || 
-                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C'))
-            ) {
-                e.preventDefault();
-                alert('Akses inspeksi kode sumber dibatasi!');
-                return false;
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            900: '#881337',
+                        },
+                        dark: {
+                            bg: '#0b0f17',
+                            card: 'rgba(23, 29, 43, 0.7)',
+                            border: 'rgba(255, 255, 255, 0.08)'
+                        }
+                    }
+                }
             }
-        });
-
-        // 3. Deteksi jika Developer Tools Terbuka (Opsional, mengamankan halaman)
-        setInterval(function() {
-            const threshold = 160;
-            if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
-                document.body.innerHTML = "<h2 style='text-align:center; margin-top:35vh; font-family:sans-serif; color:red;'>Akses Ditolak: Developer Tools terdeteksi!</h2>";
-            }
-        }, 1000);
+        }
     </script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="text-gray-100 min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white">
 
-    <div class="container">
-        <h1>Selamat Datang di Website Saya</h1>
-        <p>Website ini dilindungi dari tindakan salin kode sembarangan.</p>
-        <button id="cta-btn">Klik Saya</button>
-    </div>
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-50 glass-card border-b border-gray-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-rose-400 flex items-center justify-center font-bold text-lg text-white shadow-lg shadow-brand-600/30">
+                    HMS
+                </div>
+                <div>
+                    <span class="text-xs uppercase tracking-widest text-brand-500 font-semibold block">Universitas 17 Agustus 1945</span>
+                    <h1 class="text-lg font-bold text-white tracking-wide">DIES NATALIS HMS UNTAG</h1>
+                </div>
+            </div>
+            <span class="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-brand-500/10 text-brand-500 border border-brand-500/20">
+                <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span> Registration Open
+            </span>
+        </div>
+    </header>
 
-    <!-- Panggil script yang sudah diamankan -->
+    <!-- Hero Section -->
+    <section class="relative py-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gray-800/80 border border-gray-700 text-xs font-medium text-gray-300 mb-6 backdrop-blur-md">
+            🏆 Pendaftaran Resmi Cabang Lomba
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4">
+            Bergabung & Raih Kemenangan di <span class="bg-gradient-to-r from-brand-500 via-rose-400 to-amber-300 bg-clip-text text-transparent">Dies Natalis</span>
+        </h2>
+        <p class="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
+            Himpunan Mahasiswa Sipil Universitas 17 Agustus 1945 Samarinda. Isi formulir di bawah ini sesuai cabang lomba yang ingin Anda ikuti.
+        </p>
+    </section>
+
+    <!-- Main Content Form -->
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        
+        <!-- Tab Navigation -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 p-1.5 glass-card rounded-2xl mb-8 border border-dark-border">
+            <button onclick="switchTab('mlbb')" id="tab-mlbb" class="tab-btn active py-3 px-4 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2">
+                🎮 MLBB
+            </button>
+            <button onclick="switchTab('badminton')" id="tab-badminton" class="tab-btn py-3 px-4 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2">
+                🏸 Badminton
+            </button>
+            <button onclick="switchTab('domino')" id="tab-domino" class="tab-btn py-3 px-4 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2">
+                🀄 Domino
+            </button>
+            <button onclick="switchTab('autocad')" id="tab-autocad" class="tab-btn py-3 px-4 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2">
+                📐 AutoCAD
+            </button>
+        </div>
+
+        <!-- Form Card Container -->
+        <div class="glass-card rounded-3xl p-6 sm:p-10 shadow-2xl border border-dark-border relative">
+            <form id="regForm" onsubmit="submitForm(event)">
+                
+                <!-- CONTAINER INPUT FORM DINAMIS -->
+                <div id="formFields" class="space-y-6"></div>
+
+                <!-- Submit Button -->
+                <div class="mt-8 pt-6 border-t border-gray-800">
+                    <button type="submit" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-brand-600 to-rose-600 hover:from-brand-500 hover:to-rose-500 text-white font-bold text-base shadow-lg shadow-brand-600/30 hover:shadow-brand-500/50 transition-all duration-300 flex items-center justify-center gap-2">
+                        <span>Kirim Pendaftaran via WhatsApp</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </button>
+                    <p class="text-center text-xs text-gray-500 mt-3">Data pendaftaran akan diformat otomatis dan dikirimkan ke Panitia via WhatsApp.</p>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-card border-t border-gray-800/80 py-6 text-center text-xs text-gray-500">
+        <p>&copy; 2026 HMS UNTAG Samarinda. All Rights Reserved.</p>
+    </footer>
+
+    <!-- External Script -->
     <script src="script.js"></script>
 </body>
 </html>
