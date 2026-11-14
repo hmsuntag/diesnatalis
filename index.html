@@ -11,7 +11,7 @@
     <!-- Google Font (Plus Jakarta Sans) -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Firebase SDK (Compat Version untuk kemudahan integrasi langsung) -->
+    <!-- Firebase SDK (Compat Version) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 
@@ -44,6 +44,7 @@
             background-color: #0B0F17;
             color: #F3F4F6;
         }
+        /* Glassmorphism Styles */
         .glass-card {
             background: rgba(22, 31, 48, 0.7);
             backdrop-filter: blur(16px);
@@ -57,12 +58,14 @@
             border-color: rgba(244, 63, 94, 0.4);
             box-shadow: 0 10px 30px -10px rgba(244, 63, 94, 0.2);
         }
+        /* Mesh background gradient */
         .bg-mesh {
             background-image: 
                 radial-gradient(at 0% 0%, rgba(244, 63, 94, 0.12) 0px, transparent 50%),
                 radial-gradient(at 100% 100%, rgba(225, 29, 72, 0.08) 0px, transparent 50%),
                 radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.5) 0px, transparent 100%);
         }
+        /* Custom scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0B0F17; }
         ::-webkit-scrollbar-thumb { background: #2A364F; border-radius: 4px; }
@@ -75,7 +78,11 @@
     <script>
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'F12' || (e.ctrlKey && e.key === 'U') || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C'))) {
+            if (
+                e.key === 'F12' || 
+                (e.ctrlKey && e.key.toUpperCase() === 'U') || 
+                (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key.toUpperCase()))
+            ) {
                 e.preventDefault();
                 return false;
             }
@@ -122,6 +129,7 @@
                 Tunjukkan bakat, sportivitas, dan raih prestasi. Pilih cabang lomba di bawah ini dan lengkapi formulir pendaftaran Anda secara langsung.
             </p>
 
+            <!-- STATS QUICK VIEW -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto">
                 <div class="glass-card rounded-2xl p-3.5 text-center transition-all hover:translate-y-[-2px]">
                     <i class="fa-solid fa-gamepad text-rose-400 text-xl mb-1"></i>
@@ -150,6 +158,7 @@
     <!-- MAIN FORM & TAB SECTION -->
     <main class="max-w-4xl mx-auto px-4 pb-16 w-full flex-grow z-20">
         
+        <!-- SELEKSI CABANG LOMBA TAB -->
         <div class="glass-card rounded-2xl overflow-hidden mb-6 p-2 sm:p-3">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-2" id="tab-buttons">
                 <button type="button" onclick="switchLomba('ml')" id="tab-ml" 
@@ -178,6 +187,7 @@
             </div>
         </div>
 
+        <!-- FORM CONTAINER -->
         <div class="glass-card rounded-2xl p-6 sm:p-8">
             <div class="border-b border-slate-800 pb-5 mb-6 flex items-center justify-between">
                 <div>
@@ -188,7 +198,7 @@
                 </div>
                 <div class="hidden sm:block">
                     <span id="badge-category" class="bg-rose-500/10 text-rose-300 text-xs font-semibold px-3 py-1 rounded-full border border-rose-500/20">
-                        Squad / Tim
+                        Squad / Tim (5-6 Orang)
                     </span>
                 </div>
             </div>
@@ -204,15 +214,15 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-medium text-slate-300 mb-1.5">1. Nama Tim / Squad *</label>
-                                <input type="text" id="ml_nama_tim" required placeholder="Contoh: HMS Titan Squad" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500">
+                                <input type="text" id="ml_nama_tim" required placeholder="Contoh: HMS Titan Squad" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all">
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-300 mb-1.5">2. Asal Kampus / Jurusan / Instansi *</label>
-                                <input type="text" id="ml_instansi" required placeholder="Contoh: UNTAG Samarinda / Teknik Sipil" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500">
+                                <input type="text" id="ml_instansi" required placeholder="Contoh: UNTAG Samarinda / Teknik Sipil" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all">
                             </div>
                             <div class="md:col-span-2">
                                 <label class="block text-xs font-medium text-slate-300 mb-1.5">3. Nomor WhatsApp Penanggung Jawab *</label>
-                                <input type="tel" id="ml_whatsapp" required placeholder="081234567890" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500">
+                                <input type="tel" id="ml_whatsapp" required placeholder="081234567890" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all">
                             </div>
                         </div>
                     </div>
@@ -473,32 +483,33 @@
                 <span>HMS UNTAG SAMARINDA</span>
             </div>
             <p class="text-slate-500">© 2026 Dies Natalis Himpunan Mahasiswa Sipil. All Rights Reserved.</p>
+            <p class="text-slate-600">Universitas 17 Agustus 1945 Samarinda - Kalimantan Timur</p>
         </div>
     </footer>
 
-    <!-- MODAL SUCCESS -->
-    <div id="successModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
-        <div class="glass-card rounded-2xl max-w-md w-full p-6 text-center shadow-2xl border border-slate-800">
-            <div class="w-14 h-14 bg-rose-500/10 text-rose-400 rounded-2xl border border-rose-500/20 flex items-center justify-center mx-auto mb-4 text-2xl">
-                <i class="fa-solid fa-circle-check"></i>
+    <!-- MODAL NOTIFIKASI (BERHASIL / GAGAL) -->
+    <div id="statusModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-card rounded-2xl max-w-md w-full p-6 text-center shadow-2xl border border-slate-800 transform transition-all scale-100">
+            <div id="modalIconContainer" class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl border">
+                <i id="modalIcon" class="fa-solid"></i>
             </div>
-            <h3 class="text-xl font-bold text-white mb-2" id="modalTitle">Pendaftaran Berhasil!</h3>
+            <h3 class="text-xl font-bold text-white mb-2" id="modalTitle">Status Pendaftaran</h3>
             <p class="text-xs text-slate-400 mb-6 leading-relaxed" id="modalDesc">
-                Data Anda telah berhasil disimpan ke database Firebase dan dikirimkan ke WhatsApp Panitia melalui Fonnte.
+                Pesan status akan muncul di sini.
             </p>
             <div class="space-y-2.5">
-                <button type="button" onclick="closeModal()" class="w-full bg-slate-800/80 hover:bg-slate-800 text-slate-300 font-medium py-3 px-4 rounded-xl text-sm border border-slate-700/50">
-                    Tutup / Form Baru
+                <button type="button" onclick="closeModal()" class="w-full bg-slate-800/80 hover:bg-slate-800 text-slate-300 font-medium py-3 px-4 rounded-xl text-sm border border-slate-700/50 transition-all">
+                    Tutup
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT: FIREBASE & FONNTE INTEGRATION -->
+    <!-- JAVASCRIPT: FIREBASE, FONNTE & DYNAMIC VALIDATION -->
     <script>
         // ================= CONFIGURATION =================
         const FIREBASE_CONFIG = {
-            databaseURL: "https://hms-diesnatalis-default-rtdb.firebaseio.com/" // Ganti dengan URL Database Firebase Anda
+            databaseURL: "https://hms-diesnatalis-default-rtdb.firebaseio.com/"
         };
         const FONNTE_TOKEN = "JP3JdqHBma7fgxy88MqT";
         const NOMOR_PANITIA = "6281522562072";
@@ -509,6 +520,26 @@
         const db = firebase.database();
 
         let activeLomba = 'ml';
+
+        // Mengatur atribut required secara dinamis hanya untuk tab yang aktif
+        function updateRequiredFields(activeCategory) {
+            const allForms = ['ml', 'badminton', 'domino', 'autocad'];
+            allForms.forEach(cat => {
+                const formDiv = document.getElementById(`form-${cat}`);
+                if (!formDiv) return;
+                const inputs = formDiv.querySelectorAll('input, select');
+                inputs.forEach(input => {
+                    if (cat === activeCategory) {
+                        // Kolom cadangan ML tetap opsional
+                        if (!input.id.includes('Cadangan')) {
+                            input.setAttribute('required', 'required');
+                        }
+                    } else {
+                        input.removeAttribute('required');
+                    }
+                });
+            });
+        }
 
         function switchLomba(kategori) {
             activeLomba = kategori;
@@ -528,6 +559,8 @@
                     if(form) form.classList.add('hidden');
                 }
             });
+
+            updateRequiredFields(kategori);
 
             const titleEl = document.getElementById('form-title');
             const subTitleEl = document.getElementById('form-subtitle');
@@ -562,7 +595,7 @@
             
             const btn = document.getElementById('submitBtn');
             btn.disabled = true;
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-lg"></i><span>Menyimpan ke Database & Fonnte...</span>`;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-lg"></i><span>Memproses Data...</span>`;
 
             let payloadData = {};
             let textFormatted = "";
@@ -585,7 +618,7 @@
 
                 textFormatted = `*PENDAFTARAN LOMBA MOBILE LEGENDS*\n*DIES NATALIS HMS UNTAG SAMARINDA*\n\n` +
                                 `1. Nama Tim/Squad : ${payloadData.tim}\n` +
-                                `2. Asal Instansi : ${payloadData.instansi}\n` +
+                                `2. Asal Kampus/Jurusan/Instansi : ${payloadData.instansi}\n` +
                                 `3. No. WhatsApp : ${payloadData.whatsapp}\n\n` +
                                 `A. Kapten: ${payloadData.p1.nama} (${payloadData.p1.nick}) - ID: ${payloadData.p1.id} - Role: ${payloadData.p1.role}\n` +
                                 `B. Pemain 2: ${payloadData.p2.nama} (${payloadData.p2.nick}) - ID: ${payloadData.p2.id} - Role: ${payloadData.p2.role}\n` +
@@ -602,7 +635,19 @@
                     p2: { nama: getValue('bad_p2_nama'), punggung: getValue('bad_p2_punggung'), ttl: getValue('bad_p2_ttl'), wa: getValue('bad_p2_wa'), instansi: getValue('bad_p2_instansi') },
                     timestamp: new Date().toISOString()
                 };
-                textFormatted = `*PENDAFTARAN LOMBA BADMINTON*\n*DIES NATALIS HMS UNTAG SAMARINDA*\n\nTim: ${payloadData.tim}\nP1: ${payloadData.p1.nama} (${payloadData.p1.wa})\nP2: ${payloadData.p2.nama} (${payloadData.p2.wa})`;
+
+                textFormatted = `*PENDAFTARAN LOMBA BADMINTON*\n*DIES NATALIS HMS UNTAG SAMARINDA*\n\n` +
+                                `1. NAMA TIM/PASANGAN : ${payloadData.tim}\n\n` +
+                                `A. DATA PEMAIN 1\n` +
+                                `   • Nama : ${payloadData.p1.nama} (${payloadData.p1.punggung})\n` +
+                                `   • TTL : ${payloadData.p1.ttl}\n` +
+                                `   • WA : ${payloadData.p1.wa}\n` +
+                                `   • Instansi : ${payloadData.p1.instansi}\n\n` +
+                                `B. DATA PEMAIN 2\n` +
+                                `   • Nama : ${payloadData.p2.nama} (${payloadData.p2.punggung})\n` +
+                                `   • TTL : ${payloadData.p2.ttl}\n` +
+                                `   • WA : ${payloadData.p2.wa}\n` +
+                                `   • Instansi : ${payloadData.p2.instansi}`;
 
             } else if (activeLomba === 'domino') {
                 dbPath = "pendaftaran/domino";
@@ -612,7 +657,11 @@
                     p2: { nama: getValue('dom_p2_nama'), panggilan: getValue('dom_p2_panggilan'), wa: getValue('dom_p2_wa'), angkatan: getValue('dom_p2_angkatan') },
                     timestamp: new Date().toISOString()
                 };
-                textFormatted = `*PENDAFTARAN LOMBA DOMINO*\n*DIES NATALIS HMS UNTAG SAMARINDA*\n\nTim: ${payloadData.tim}\nP1: ${payloadData.p1.nama}\nP2: ${payloadData.p2.nama}`;
+
+                textFormatted = `*PENDAFTARAN LOMBA DOMINO*\n*DIES NATALIS HMS UNTAG SAMARINDA*\n\n` +
+                                `• NAMA TIM/PASANGAN : ${payloadData.tim}\n\n` +
+                                `• PEMAIN 1 : ${payloadData.p1.nama} (${payloadData.p1.panggilan}) | WA: ${payloadData.p1.wa} | Angkatan: ${payloadData.p1.angkatan}\n` +
+                                `• PEMAIN 2 : ${payloadData.p2.nama} (${payloadData.p2.panggilan}) | WA: ${payloadData.p2.wa} | Angkatan: ${payloadData.p2.angkatan}`;
 
             } else if (activeLomba === 'autocad') {
                 dbPath = "pendaftaran/autocad";
@@ -625,47 +674,92 @@
                     instansi: getValue('cad_instansi'),
                     timestamp: new Date().toISOString()
                 };
-                textFormatted = `*PENDAFTARAN LOMBA AUTOCAD*\n*DIES NATALIS HMS UNTAG SAMARINDA*\n\nNama: ${payloadData.nama}\nWA: ${payloadData.wa}\nInstansi: ${payloadData.instansi}`;
+
+                textFormatted = `*PENDAFTARAN LOMBA AUTOCAD*\n*DIES NATALIS HMS UNTAG SAMARINDA*\n\n` +
+                                `• Nama Lengkap : ${payloadData.nama}\n` +
+                                `• Nama Panggilan : ${payloadData.panggilan}\n` +
+                                `• Email : ${payloadData.email}\n` +
+                                `• No. WA : ${payloadData.wa}\n` +
+                                `• TTL : ${payloadData.ttl}\n` +
+                                `• Instansi : ${payloadData.instansi}`;
             }
 
             try {
-                // 1. Simpan ke Firebase Database
+                // 1. Simpan ke Firebase Realtime Database
                 await db.ref(dbPath).push(payloadData);
 
                 // 2. Kirim Pesan ke WhatsApp via Fonnte API
+                const formData = new FormData();
+                formData.append('target', NOMOR_PANITIA);
+                formData.append('message', textFormatted);
+                formData.append('countryCode', '62');
+
                 const response = await fetch('https://api.fonnte.com/send', {
                     method: 'POST',
                     headers: {
-                        'Authorization': FONNTE_TOKEN,
-                        'Content-Type': 'application/json'
+                        'Authorization': FONNTE_TOKEN
                     },
-                    body: JSON.stringify({
-                        target: NOMOR_PANITIA,
-                        message: textFormatted,
-                        countryCode: '62'
-                    })
+                    body: formData
                 });
 
                 const result = await response.json();
                 
                 if (result.status) {
-                    document.getElementById('successModal').classList.remove('hidden');
+                    showModal(
+                        true, 
+                        "Pendaftaran Berhasil!", 
+                        "Data Anda telah berhasil disimpan ke database dan notifikasi WhatsApp berhasil dikirim ke panitia."
+                    );
                     document.getElementById('registrationForm').reset();
                 } else {
-                    alert('Data tersimpan di Database, namun Fonnte gagal mengirim pesan: ' + (result.reason || 'Kesalahan sistem.'));
+                    showModal(
+                        false, 
+                        "Pengiriman WhatsApp Gagal", 
+                        "Data tersimpan di Database, namun Fonnte gagal mengirim pesan: " + (result.reason || 'Periksa kembali perangkat WhatsApp di Fonnte.')
+                    );
                 }
             } catch (error) {
                 console.error('Error:', error);
-                alert('Terjadi kesalahan saat menghubungkan ke server Firebase / Fonnte.');
+                showModal(
+                    false, 
+                    "Terjadi Kesalahan Sistem", 
+                    "Gagal terhubung ke server Firebase atau Fonnte. Periksa koneksi internet Anda atau aturan Database Rules."
+                );
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = `<i class="fa-brands fa-whatsapp text-lg"></i><span>Kirim Pendaftaran & Simpan</span>`;
             }
         }
 
-        function closeModal() {
-            document.getElementById('successModal').classList.add('hidden');
+        function showModal(isSuccess, title, description) {
+            const modal = document.getElementById('statusModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDesc = document.getElementById('modalDesc');
+            const iconContainer = document.getElementById('modalIconContainer');
+            const modalIcon = document.getElementById('modalIcon');
+
+            modalTitle.innerText = title;
+            modalDesc.innerText = description;
+
+            if (isSuccess) {
+                iconContainer.className = "w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20";
+                modalIcon.className = "fa-solid fa-circle-check";
+            } else {
+                iconContainer.className = "w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl bg-rose-500/10 text-rose-400 border border-rose-500/20";
+                modalIcon.className = "fa-solid fa-circle-exclamation";
+            }
+
+            modal.classList.remove('hidden');
         }
+
+        function closeModal() {
+            document.getElementById('statusModal').classList.add('hidden');
+        }
+
+        // Inisialisasi validasi required saat halaman pertama dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            updateRequiredFields('ml');
+        });
     </script>
 </body>
 </html>
