@@ -11,6 +11,10 @@
     <!-- Google Font (Plus Jakarta Sans) -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Firebase SDK (Compat Version untuk kemudahan integrasi langsung) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -21,7 +25,7 @@
                             dark: '#0B0F17',
                             card: '#161F30',
                             border: '#2A364F',
-                            accent: '#F43F5E', // Rose Crimson Modern
+                            accent: '#F43F5E',
                             accentHover: '#E11D48',
                             glow: 'rgba(244, 63, 94, 0.15)',
                             gold: '#F59E0B'
@@ -40,7 +44,6 @@
             background-color: #0B0F17;
             color: #F3F4F6;
         }
-        /* Glassmorphism Styles */
         .glass-card {
             background: rgba(22, 31, 48, 0.7);
             backdrop-filter: blur(16px);
@@ -54,45 +57,25 @@
             border-color: rgba(244, 63, 94, 0.4);
             box-shadow: 0 10px 30px -10px rgba(244, 63, 94, 0.2);
         }
-        /* Mesh background gradient */
         .bg-mesh {
             background-image: 
                 radial-gradient(at 0% 0%, rgba(244, 63, 94, 0.12) 0px, transparent 50%),
                 radial-gradient(at 100% 100%, rgba(225, 29, 72, 0.08) 0px, transparent 50%),
                 radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.5) 0px, transparent 100%);
         }
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0B0F17;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #2A364F;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #F43F5E;
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0B0F17; }
+        ::-webkit-scrollbar-thumb { background: #2A364F; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #F43F5E; }
     </style>
 </head>
 <body class="bg-mesh min-h-screen flex flex-col justify-between selection:bg-rose-500 selection:text-white">
 
     <!-- PROTEKSI SECURITY FRONTEND SCRIPT -->
     <script>
-        // Mematikan Klik Kanan
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-
-        // Mematikan Tombol Pintas Inspeksi Kode (F12, Ctrl+U, Ctrl+Shift+I/J/C)
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
         document.addEventListener('keydown', function(e) {
-            if (
-                e.key === 'F12' || 
-                (e.ctrlKey && e.key === 'U') || 
-                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C'))
-            ) {
+            if (e.key === 'F12' || (e.ctrlKey && e.key === 'U') || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C'))) {
                 e.preventDefault();
                 return false;
             }
@@ -139,7 +122,6 @@
                 Tunjukkan bakat, sportivitas, dan raih prestasi. Pilih cabang lomba di bawah ini dan lengkapi formulir pendaftaran Anda secara langsung.
             </p>
 
-            <!-- STATS QUICK VIEW -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto">
                 <div class="glass-card rounded-2xl p-3.5 text-center transition-all hover:translate-y-[-2px]">
                     <i class="fa-solid fa-gamepad text-rose-400 text-xl mb-1"></i>
@@ -168,7 +150,6 @@
     <!-- MAIN FORM & TAB SECTION -->
     <main class="max-w-4xl mx-auto px-4 pb-16 w-full flex-grow z-20">
         
-        <!-- SELEKSI CABANG LOMBA TAB -->
         <div class="glass-card rounded-2xl overflow-hidden mb-6 p-2 sm:p-3">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-2" id="tab-buttons">
                 <button type="button" onclick="switchLomba('ml')" id="tab-ml" 
@@ -197,7 +178,6 @@
             </div>
         </div>
 
-        <!-- FORM CONTAINER -->
         <div class="glass-card rounded-2xl p-6 sm:p-8">
             <div class="border-b border-slate-800 pb-5 mb-6 flex items-center justify-between">
                 <div>
@@ -224,15 +204,15 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-medium text-slate-300 mb-1.5">1. Nama Tim / Squad *</label>
-                                <input type="text" id="ml_nama_tim" required placeholder="Contoh: HMS Titan Squad" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all">
+                                <input type="text" id="ml_nama_tim" required placeholder="Contoh: HMS Titan Squad" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500">
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-300 mb-1.5">2. Asal Kampus / Jurusan / Instansi *</label>
-                                <input type="text" id="ml_instansi" required placeholder="Contoh: UNTAG Samarinda / Teknik Sipil" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all">
+                                <input type="text" id="ml_instansi" required placeholder="Contoh: UNTAG Samarinda / Teknik Sipil" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500">
                             </div>
                             <div class="md:col-span-2">
                                 <label class="block text-xs font-medium text-slate-300 mb-1.5">3. Nomor WhatsApp Penanggung Jawab *</label>
-                                <input type="tel" id="ml_whatsapp" required placeholder="081234567890" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all">
+                                <input type="tel" id="ml_whatsapp" required placeholder="081234567890" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500">
                             </div>
                         </div>
                     </div>
@@ -326,7 +306,6 @@
                         <input type="text" id="bad_nama_tim" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500" placeholder="Contoh: Ganda Sipil A">
                     </div>
 
-                    <!-- Data Pemain 1 Badminton -->
                     <div class="bg-slate-900/40 rounded-xl p-4 border border-slate-800 space-y-3">
                         <div class="font-semibold text-sm text-slate-200 border-b border-slate-800 pb-2 flex items-center gap-2">
                             <i class="fa-solid fa-user text-rose-400"></i> A. Data Pemain 1 *
@@ -355,7 +334,6 @@
                         </div>
                     </div>
 
-                    <!-- Data Pemain 2 Badminton -->
                     <div class="bg-slate-900/40 rounded-xl p-4 border border-slate-800 space-y-3">
                         <div class="font-semibold text-sm text-slate-200 border-b border-slate-800 pb-2 flex items-center gap-2">
                             <i class="fa-solid fa-user text-rose-400"></i> B. Data Pemain 2 *
@@ -392,11 +370,8 @@
                         <input type="text" id="dom_nama_tim" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500" placeholder="Contoh: Domino Duo Sipil">
                     </div>
 
-                    <!-- Pemain 1 Domino -->
                     <div class="bg-slate-900/40 rounded-xl p-4 border border-slate-800 space-y-3">
-                        <div class="font-semibold text-sm text-slate-200 border-b border-slate-800 pb-2">
-                            • Data Pemain 1 *
-                        </div>
+                        <div class="font-semibold text-sm text-slate-200 border-b border-slate-800 pb-2">• Data Pemain 1 *</div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Nama Lengkap *</label>
@@ -417,11 +392,8 @@
                         </div>
                     </div>
 
-                    <!-- Pemain 2 Domino -->
                     <div class="bg-slate-900/40 rounded-xl p-4 border border-slate-800 space-y-3">
-                        <div class="font-semibold text-sm text-slate-200 border-b border-slate-800 pb-2">
-                            • Data Pemain 2 *
-                        </div>
+                        <div class="font-semibold text-sm text-slate-200 border-b border-slate-800 pb-2">• Data Pemain 2 *</div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                             <div>
                                 <label class="block text-xs font-medium text-slate-400 mb-1">Nama Lengkap *</label>
@@ -482,18 +454,18 @@
                 <div class="pt-6 border-t border-slate-800 mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div class="text-xs text-slate-400 flex items-center">
                         <i class="fa-solid fa-shield-halved text-rose-400 mr-2 text-sm"></i>
-                        Pendaftaran aman & terhubung otomatis ke WhatsApp Panitia via Fonnte.
+                        Data tersimpan di Database & terkirim otomatis ke WhatsApp Panitia.
                     </div>
                     <button type="submit" id="submitBtn" class="w-full sm:w-auto bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-600 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg shadow-rose-950/50 hover:shadow-rose-600/30 transition-all duration-300 flex items-center justify-center space-x-2">
                         <i class="fa-brands fa-whatsapp text-lg"></i>
-                        <span>Kirim Pendaftaran via Fonnte</span>
+                        <span>Kirim Pendaftaran & Simpan</span>
                     </button>
                 </div>
             </form>
         </div>
     </main>
 
-    <!-- FOOTER SECTION -->
+    <!-- FOOTER -->
     <footer class="glass-card border-t border-slate-800/80 text-slate-400 py-8 text-center text-xs">
         <div class="max-w-4xl mx-auto px-4 space-y-2.5">
             <div class="flex items-center justify-center space-x-2 font-bold text-sm text-white">
@@ -501,19 +473,18 @@
                 <span>HMS UNTAG SAMARINDA</span>
             </div>
             <p class="text-slate-500">© 2026 Dies Natalis Himpunan Mahasiswa Sipil. All Rights Reserved.</p>
-            <p class="text-slate-600">Universitas 17 Agustus 1945 Samarinda - Kalimantan Timur</p>
         </div>
     </footer>
 
-    <!-- MODAL KONFIRMASI SUCCESS -->
+    <!-- MODAL SUCCESS -->
     <div id="successModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
-        <div class="glass-card rounded-2xl max-w-md w-full p-6 text-center shadow-2xl border border-slate-800 transform transition-all scale-100">
+        <div class="glass-card rounded-2xl max-w-md w-full p-6 text-center shadow-2xl border border-slate-800">
             <div class="w-14 h-14 bg-rose-500/10 text-rose-400 rounded-2xl border border-rose-500/20 flex items-center justify-center mx-auto mb-4 text-2xl">
                 <i class="fa-solid fa-circle-check"></i>
             </div>
-            <h3 class="text-xl font-bold text-white mb-2" id="modalTitle">Pendaftaran Berhasil Dikirim</h3>
+            <h3 class="text-xl font-bold text-white mb-2" id="modalTitle">Pendaftaran Berhasil!</h3>
             <p class="text-xs text-slate-400 mb-6 leading-relaxed" id="modalDesc">
-                Data pendaftaran Anda telah berhasil diproses dan dikirimkan secara otomatis ke WhatsApp Panitia melalui server Fonnte.
+                Data Anda telah berhasil disimpan ke database Firebase dan dikirimkan ke WhatsApp Panitia melalui Fonnte.
             </p>
             <div class="space-y-2.5">
                 <button type="button" onclick="closeModal()" class="w-full bg-slate-800/80 hover:bg-slate-800 text-slate-300 font-medium py-3 px-4 rounded-xl text-sm border border-slate-700/50">
@@ -523,17 +494,24 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC & FONNTE INTEGRATION -->
+    <!-- JAVASCRIPT: FIREBASE & FONNTE INTEGRATION -->
     <script>
-        // Konfigurasi Fonnte & Nomor Panitia
+        // ================= CONFIGURATION =================
+        const FIREBASE_CONFIG = {
+            databaseURL: "https://hms-diesnatalis-default-rtdb.firebaseio.com/" // Ganti dengan URL Database Firebase Anda
+        };
         const FONNTE_TOKEN = "JP3JdqHBma7fgxy88MqT";
         const NOMOR_PANITIA = "6285190659491";
+        // =================================================
+
+        // Inisialisasi Firebase
+        firebase.initializeApp(FIREBASE_CONFIG);
+        const db = firebase.database();
 
         let activeLomba = 'ml';
 
         function switchLomba(kategori) {
             activeLomba = kategori;
-            
             const tabs = ['ml', 'badminton', 'domino', 'autocad'];
             tabs.forEach(t => {
                 const btn = document.getElementById(`tab-${t}`);
@@ -551,7 +529,6 @@
                 }
             });
 
-            // Update Header Form Titles
             const titleEl = document.getElementById('form-title');
             const subTitleEl = document.getElementById('form-subtitle');
             const badgeEl = document.getElementById('badge-category');
@@ -582,111 +559,80 @@
 
         async function handleFormSubmit(e) {
             e.preventDefault();
-            let textFormatted = "";
-
-            if (activeLomba === 'ml') {
-                textFormatted = 
-`*PENDAFTARAN LOMBA MOBILE LEGENDS*
-*DIES NATALIS HMS UNTAG SAMARINDA*
-
-1. Nama Tim/Squad : ${getValue('ml_nama_tim')}
-2. Asal Kampus/Jurusan/Instansi : ${getValue('ml_instansi')}
-3. No. WhatsApp : ${getValue('ml_whatsapp')}
-
-A. Data Pemain 1 (Kapten)
-   • Nama Lengkap : ${getValue('ml_p1_nama')}
-   • Nickname : ${getValue('ml_p1_nick')}
-   • ID & Server MLBB : ${getValue('ml_p1_id')}
-   • Role Utama : ${getValue('ml_p1_role')}
-
-B. Data Pemain 2
-   • Nama Lengkap : ${getValue('ml_p2_nama')}
-   • Nickname : ${getValue('ml_p2_nick')}
-   • ID & Server MLBB : ${getValue('ml_p2_id')}
-   • Role Utama : ${getValue('ml_p2_role')}
-
-C. Data Pemain 3
-   • Nama Lengkap : ${getValue('ml_p3_nama')}
-   • Nickname : ${getValue('ml_p3_nick')}
-   • ID & Server MLBB : ${getValue('ml_p3_id')}
-   • Role Utama : ${getValue('ml_p3_role')}
-
-D. Data Pemain 4
-   • Nama Lengkap : ${getValue('ml_p4_nama')}
-   • Nickname : ${getValue('ml_p4_nick')}
-   • ID & Server MLBB : ${getValue('ml_p4_id')}
-   • Role Utama : ${getValue('ml_p4_role')}
-
-E. Data Pemain 5
-   • Nama Lengkap : ${getValue('ml_p5_nama')}
-   • Nickname : ${getValue('ml_p5_nick')}
-   • ID & Server MLBB : ${getValue('ml_p5_id')}
-   • Role Utama : ${getValue('ml_p5_role')}
-
-F. Data Pemain Cadangan
-   • Nama Lengkap : ${getValue('ml_pCadangan_nama') || '-'}
-   • Nickname : ${getValue('ml_pCadangan_nick') || '-'}
-   • ID & Server MLBB : ${getValue('ml_pCadangan_id') || '-'}
-   • Role Utama : ${getValue('ml_pCadangan_role') || '-'}`;
-
-            } else if (activeLomba === 'badminton') {
-                textFormatted = 
-`*PENDAFTARAN LOMBA BADMINTON*
-*DIES NATALIS HMS UNTAG SAMARINDA*
-
-1. NAMA TIM/PASANGAN : ${getValue('bad_nama_tim')}
-
-A. DATA PEMAIN 1
-   • NAMA LENGKAP : ${getValue('bad_p1_nama')}
-   • NAMA PANGGILAN/ NAMA PUNGGUNG : ${getValue('bad_p1_punggung')}
-   • TEMPAT, TGL LAHIR : ${getValue('bad_p1_ttl')}
-   • NOMOR WHATSAPP : ${getValue('bad_p1_wa')}
-   • ASAL KAMPUS/ JURUSAN/ INSTANSI : ${getValue('bad_p1_instansi')}
-
-B. DATA PEMAIN 2
-   • NAMA LENGKAP : ${getValue('bad_p2_nama')}
-   • NAMA PANGGILAN/ NAMA PUNGGUNG : ${getValue('bad_p2_punggung')}
-   • TEMPAT, TGL LAHIR : ${getValue('bad_p2_ttl')}
-   • NOMOR WHATSAPP : ${getValue('bad_p2_wa')}
-   • ASAL KAMPUS/ JURUSAN/ INSTANSI : ${getValue('bad_p2_instansi')}`;
-
-            } else if (activeLomba === 'domino') {
-                textFormatted = 
-`*PENDAFTARAN LOMBA DOMINO*
-*DIES NATALIS HMS UNTAG SAMARINDA*
-
-• NAMA TIM/ PASANGAN : ${getValue('dom_nama_tim')}
-
-• DATA PEMAIN 1
-  - NAMA LENGKAP : ${getValue('dom_p1_nama')}
-  - NAMA PANGGILAN : ${getValue('dom_p1_panggilan')}
-  - NO. WHATSAPP : ${getValue('dom_p1_wa')}
-  - ANGKATAN / INSTANSI : ${getValue('dom_p1_angkatan')}
-
-• DATA PEMAIN 2
-  - NAMA LENGKAP : ${getValue('dom_p2_nama')}
-  - NAMA PANGGILAN : ${getValue('dom_p2_panggilan')}
-  - NO. WHATSAPP : ${getValue('dom_p2_wa')}
-  - ANGKATAN / INSTANSI : ${getValue('dom_p2_angkatan')}`;
-
-            } else if (activeLomba === 'autocad') {
-                textFormatted = 
-`*PENDAFTARAN LOMBA AUTOCAD*
-*DIES NATALIS HMS UNTAG SAMARINDA*
-
-• NAMA LENGKAP : ${getValue('cad_nama')}
-• NAMA PANGGILAN : ${getValue('cad_panggilan')}
-• EMAIL AKTIF : ${getValue('cad_email')}
-• NO. WHATSAPP : ${getValue('cad_wa')}
-• TEMPAT, TGL LAHIR : ${getValue('cad_ttl')}
-• ASAL KAMPUS/ JURUSAN/ INSTANSI : ${getValue('cad_instansi')}`;
-            }
-
+            
             const btn = document.getElementById('submitBtn');
             btn.disabled = true;
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-lg"></i><span>Mengirim ke Fonnte...</span>`;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-lg"></i><span>Menyimpan ke Database & Fonnte...</span>`;
+
+            let payloadData = {};
+            let textFormatted = "";
+            let dbPath = "";
+
+            if (activeLomba === 'ml') {
+                dbPath = "pendaftaran/mobile_legends";
+                payloadData = {
+                    tim: getValue('ml_nama_tim'),
+                    instansi: getValue('ml_instansi'),
+                    whatsapp: getValue('ml_whatsapp'),
+                    p1: { nama: getValue('ml_p1_nama'), nick: getValue('ml_p1_nick'), id: getValue('ml_p1_id'), role: getValue('ml_p1_role') },
+                    p2: { nama: getValue('ml_p2_nama'), nick: getValue('ml_p2_nick'), id: getValue('ml_p2_id'), role: getValue('ml_p2_role') },
+                    p3: { nama: getValue('ml_p3_nama'), nick: getValue('ml_p3_nick'), id: getValue('ml_p3_id'), role: getValue('ml_p3_role') },
+                    p4: { nama: getValue('ml_p4_nama'), nick: getValue('ml_p4_nick'), id: getValue('ml_p4_id'), role: getValue('ml_p4_role') },
+                    p5: { nama: getValue('ml_p5_nama'), nick: getValue('ml_p5_nick'), id: getValue('ml_p5_id'), role: getValue('ml_p5_role') },
+                    cadangan: { nama: getValue('ml_pCadangan_nama'), nick: getValue('ml_pCadangan_nick'), id: getValue('ml_pCadangan_id'), role: getValue('ml_pCadangan_role') },
+                    timestamp: new Date().toISOString()
+                };
+
+                textFormatted = `*PENDAFTARAN LOMBA MOBILE LEGENDS*\n*DIES NATALIS HMS UNTAG SAMARINDA*\n\n` +
+                                `1. Nama Tim/Squad : ${payloadData.tim}\n` +
+                                `2. Asal Instansi : ${payloadData.instansi}\n` +
+                                `3. No. WhatsApp : ${payloadData.whatsapp}\n\n` +
+                                `A. Kapten: ${payloadData.p1.nama} (${payloadData.p1.nick}) - ID: ${payloadData.p1.id} - Role: ${payloadData.p1.role}\n` +
+                                `B. Pemain 2: ${payloadData.p2.nama} (${payloadData.p2.nick}) - ID: ${payloadData.p2.id} - Role: ${payloadData.p2.role}\n` +
+                                `C. Pemain 3: ${payloadData.p3.nama} (${payloadData.p3.nick}) - ID: ${payloadData.p3.id} - Role: ${payloadData.p3.role}\n` +
+                                `D. Pemain 4: ${payloadData.p4.nama} (${payloadData.p4.nick}) - ID: ${payloadData.p4.id} - Role: ${payloadData.p4.role}\n` +
+                                `E. Pemain 5: ${payloadData.p5.nama} (${payloadData.p5.nick}) - ID: ${payloadData.p5.id} - Role: ${payloadData.p5.role}\n` +
+                                `F. Cadangan: ${payloadData.cadangan.nama || '-'}`;
+
+            } else if (activeLomba === 'badminton') {
+                dbPath = "pendaftaran/badminton";
+                payloadData = {
+                    tim: getValue('bad_nama_tim'),
+                    p1: { nama: getValue('bad_p1_nama'), punggung: getValue('bad_p1_punggung'), ttl: getValue('bad_p1_ttl'), wa: getValue('bad_p1_wa'), instansi: getValue('bad_p1_instansi') },
+                    p2: { nama: getValue('bad_p2_nama'), punggung: getValue('bad_p2_punggung'), ttl: getValue('bad_p2_ttl'), wa: getValue('bad_p2_wa'), instansi: getValue('bad_p2_instansi') },
+                    timestamp: new Date().toISOString()
+                };
+                textFormatted = `*PENDAFTARAN LOMBA BADMINTON*\n*DIES NATALIS HMS UNTAG SAMARINDA*\n\nTim: ${payloadData.tim}\nP1: ${payloadData.p1.nama} (${payloadData.p1.wa})\nP2: ${payloadData.p2.nama} (${payloadData.p2.wa})`;
+
+            } else if (activeLomba === 'domino') {
+                dbPath = "pendaftaran/domino";
+                payloadData = {
+                    tim: getValue('dom_nama_tim'),
+                    p1: { nama: getValue('dom_p1_nama'), panggilan: getValue('dom_p1_panggilan'), wa: getValue('dom_p1_wa'), angkatan: getValue('dom_p1_angkatan') },
+                    p2: { nama: getValue('dom_p2_nama'), panggilan: getValue('dom_p2_panggilan'), wa: getValue('dom_p2_wa'), angkatan: getValue('dom_p2_angkatan') },
+                    timestamp: new Date().toISOString()
+                };
+                textFormatted = `*PENDAFTARAN LOMBA DOMINO*\n*DIES NATALIS HMS UNTAG SAMARINDA*\n\nTim: ${payloadData.tim}\nP1: ${payloadData.p1.nama}\nP2: ${payloadData.p2.nama}`;
+
+            } else if (activeLomba === 'autocad') {
+                dbPath = "pendaftaran/autocad";
+                payloadData = {
+                    nama: getValue('cad_nama'),
+                    panggilan: getValue('cad_panggilan'),
+                    email: getValue('cad_email'),
+                    wa: getValue('cad_wa'),
+                    ttl: getValue('cad_ttl'),
+                    instansi: getValue('cad_instansi'),
+                    timestamp: new Date().toISOString()
+                };
+                textFormatted = `*PENDAFTARAN LOMBA AUTOCAD*\n*DIES NATALIS HMS UNTAG SAMARINDA*\n\nNama: ${payloadData.nama}\nWA: ${payloadData.wa}\nInstansi: ${payloadData.instansi}`;
+            }
 
             try {
+                // 1. Simpan ke Firebase Database
+                await db.ref(dbPath).push(payloadData);
+
+                // 2. Kirim Pesan ke WhatsApp via Fonnte API
                 const response = await fetch('https://api.fonnte.com/send', {
                     method: 'POST',
                     headers: {
@@ -703,19 +649,17 @@ B. DATA PEMAIN 2
                 const result = await response.json();
                 
                 if (result.status) {
-                    document.getElementById('modalTitle').innerText = "Pendaftaran Berhasil Dikirim!";
-                    document.getElementById('modalDesc').innerText = "Data berhasil dikirim otomatis ke WhatsApp Panitia melalui server Fonnte.";
                     document.getElementById('successModal').classList.remove('hidden');
                     document.getElementById('registrationForm').reset();
                 } else {
-                    alert('Gagal mengirim via Fonnte: ' + (result.reason || 'Kesalahan sistem.'));
+                    alert('Data tersimpan di Database, namun Fonnte gagal mengirim pesan: ' + (result.reason || 'Kesalahan sistem.'));
                 }
             } catch (error) {
                 console.error('Error:', error);
-                alert('Terjadi kesalahan jaringan saat menghubungi server Fonnte.');
+                alert('Terjadi kesalahan saat menghubungkan ke server Firebase / Fonnte.');
             } finally {
                 btn.disabled = false;
-                btn.innerHTML = `<i class="fa-brands fa-whatsapp text-lg"></i><span>Kirim Pendaftaran via Fonnte</span>`;
+                btn.innerHTML = `<i class="fa-brands fa-whatsapp text-lg"></i><span>Kirim Pendaftaran & Simpan</span>`;
             }
         }
 
