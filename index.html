@@ -97,7 +97,7 @@
                 </div>
             </div>
             <div class="flex items-center space-x-2">
-                <button onclick="openCheckStatusModal()" class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs font-semibold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5">
+                <button onclick="openCheckStatusModal()" class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs font-semibold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 cursor-pointer">
                     <i class="fa-solid fa-magnifying-glass"></i> Cek Status Pendaftaran
                 </button>
             </div>
@@ -106,9 +106,14 @@
 
     <!-- HERO SECTION -->
     <section class="py-10 sm:py-14 px-4 relative overflow-hidden">
-        <div class="max-w-4xl mx-auto text-center relative z-10">
+        <div class="max-w-4xl mx-auto text-center relative z-10 flex flex-col items-center">
+            
+            <!-- LOGO UTAMA DI TENGAH ATAS -->
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-rose-600 to-rose-400 flex items-center justify-center font-bold text-white shadow-xl shadow-rose-950/60 mb-5 border border-rose-400/30">
+                <i class="fa-solid fa-helmet-safety text-3xl"></i>
+            </div>
+
             <div class="inline-flex items-center space-x-2 bg-slate-900/80 text-rose-400 text-xs font-semibold px-4 py-1.5 rounded-full border border-rose-500/20 mb-4 shadow-sm backdrop-blur-md">
-                <i class="fa-solid fa-star text-amber-400 text-xs"></i>
                 <span>DIES NATALIS HMS UNTAG SAMARINDA</span>
             </div>
             <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-4 text-white">
@@ -117,45 +122,9 @@
                     Kompetisi & Tournament Lomba
                 </span>
             </h2>
-            <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto mb-8 font-normal leading-relaxed">
+            <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto font-normal leading-relaxed">
                 Tunjukkan bakat, sportivitas, dan raih prestasi. Pilih cabang lomba di bawah ini dan lengkapi formulir pendaftaran Anda secara langsung.
             </p>
-
-            <!-- STATS QUICK VIEW & BIAYA PENDAFTARAN -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto">
-                <div class="glass-card rounded-2xl p-3.5 text-center transition-all hover:translate-y-[-2px] border border-slate-800/80">
-                    <i class="fa-solid fa-gamepad text-rose-400 text-xl mb-1"></i>
-                    <div class="text-xs font-semibold text-white">Mobile Legends</div>
-                    <div class="text-[11px] text-slate-400 mt-0.5">5 Player + 1 Cad</div>
-                    <div class="mt-2 inline-block bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
-                        Rp 100.000
-                    </div>
-                </div>
-                <div class="glass-card rounded-2xl p-3.5 text-center transition-all hover:translate-y-[-2px] border border-slate-800/80">
-                    <i class="fa-solid fa-table-tennis-paddle-ball text-rose-400 text-xl mb-1"></i>
-                    <div class="text-xs font-semibold text-white">Badminton</div>
-                    <div class="text-[11px] text-slate-400 mt-0.5">Ganda (2 Orang)</div>
-                    <div class="mt-2 inline-block bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
-                        Rp 100.000
-                    </div>
-                </div>
-                <div class="glass-card rounded-2xl p-3.5 text-center transition-all hover:translate-y-[-2px] border border-slate-800/80">
-                    <i class="fa-solid fa-dice-five text-rose-400 text-xl mb-1"></i>
-                    <div class="text-xs font-semibold text-white">Domino</div>
-                    <div class="text-[11px] text-slate-400 mt-0.5">Pasangan (2 Orang)</div>
-                    <div class="mt-2 inline-block bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
-                        Rp 50.000
-                    </div>
-                </div>
-                <div class="glass-card rounded-2xl p-3.5 text-center transition-all hover:translate-y-[-2px] border border-slate-800/80">
-                    <i class="fa-solid fa-compass-drafting text-rose-400 text-xl mb-1"></i>
-                    <div class="text-xs font-semibold text-white">AutoCAD</div>
-                    <div class="text-[11px] text-slate-400 mt-0.5">Individu</div>
-                    <div class="mt-2 inline-block bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
-                        Rp 80.000
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -166,28 +135,28 @@
         <div class="glass-card rounded-2xl overflow-hidden mb-6 p-2 sm:p-3">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-2" id="tab-buttons">
                 <button type="button" onclick="switchLomba('ml')" id="tab-ml" 
-                    class="lomba-tab flex flex-col items-center justify-center p-3.5 rounded-xl border transition-all duration-300 text-center bg-rose-500/10 border-rose-500/40 text-white font-semibold shadow-lg shadow-rose-950/30">
+                    class="lomba-tab flex flex-col items-center justify-center p-3.5 rounded-xl border transition-all duration-300 text-center bg-rose-500/10 border-rose-500/40 text-white font-semibold shadow-lg shadow-rose-950/30 cursor-pointer">
                     <i class="fa-solid fa-gamepad text-xl mb-1.5 text-rose-400"></i>
                     <span class="text-xs sm:text-sm">Mobile Legends</span>
                     <span class="text-[10px] text-rose-300 mt-0.5">Rp 100.000</span>
                 </button>
                 
                 <button type="button" onclick="switchLomba('badminton')" id="tab-badminton" 
-                    class="lomba-tab flex flex-col items-center justify-center p-3.5 rounded-xl border border-transparent text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all duration-300 text-center font-medium">
+                    class="lomba-tab flex flex-col items-center justify-center p-3.5 rounded-xl border border-transparent text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all duration-300 text-center font-medium cursor-pointer">
                     <i class="fa-solid fa-table-tennis-paddle-ball text-xl mb-1.5 text-slate-500"></i>
                     <span class="text-xs sm:text-sm">Badminton</span>
                     <span class="text-[10px] text-slate-500 mt-0.5">Rp 100.000</span>
                 </button>
 
                 <button type="button" onclick="switchLomba('domino')" id="tab-domino" 
-                    class="lomba-tab flex flex-col items-center justify-center p-3.5 rounded-xl border border-transparent text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all duration-300 text-center font-medium">
+                    class="lomba-tab flex flex-col items-center justify-center p-3.5 rounded-xl border border-transparent text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all duration-300 text-center font-medium cursor-pointer">
                     <i class="fa-solid fa-dice-five text-xl mb-1.5 text-slate-500"></i>
                     <span class="text-xs sm:text-sm">Domino</span>
                     <span class="text-[10px] text-slate-500 mt-0.5">Rp 50.000</span>
                 </button>
 
                 <button type="button" onclick="switchLomba('autocad')" id="tab-autocad" 
-                    class="lomba-tab flex flex-col items-center justify-center p-3.5 rounded-xl border border-transparent text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all duration-300 text-center font-medium">
+                    class="lomba-tab flex flex-col items-center justify-center p-3.5 rounded-xl border border-transparent text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all duration-300 text-center font-medium cursor-pointer">
                     <i class="fa-solid fa-compass-drafting text-xl mb-1.5 text-slate-500"></i>
                     <span class="text-xs sm:text-sm">AutoCAD</span>
                     <span class="text-[10px] text-slate-500 mt-0.5">Rp 80.000</span>
@@ -241,7 +210,7 @@
                     <!-- Pemain 1 - Kapten -->
                     <div class="bg-slate-900/40 rounded-xl p-4 border border-slate-800 space-y-3">
                         <div class="font-semibold text-sm text-white flex items-center justify-between border-b border-slate-800 pb-2.5">
-                            <span class="flex items-center gap-2"><i class="fa-solid fa-crown text-amber-400"></i> A. Data Pemain 1 (Kapten) *</span>
+                            <span class="flex items-center gap-2"> A. Data Pemain 1 (Kapten) *</span>
                             <span class="text-[10px] bg-amber-400/10 text-amber-300 font-semibold px-2 py-0.5 rounded border border-amber-400/20">Kapten</span>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -474,10 +443,11 @@
                 <div class="pt-6 border-t border-slate-800 mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div class="text-xs text-slate-400 flex items-center">
                         <i class="fa-solid fa-shield-halved text-rose-400 mr-2 text-sm"></i>
-                        Pendaftaran aman & tersimpan otomatis.
+                        Pendaftaran aman & tersimpan otomatis ke Cloud Database.
                     </div>
-                    <button type="submit" class="w-full sm:w-auto bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-600 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg shadow-rose-950/50 hover:shadow-rose-600/30 transition-all duration-300 flex items-center justify-center space-x-2">
-                        <span>Kirim Pendaftaran</span>
+                    <button type="submit" class="w-full sm:w-auto bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-600 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg shadow-rose-950/50 hover:shadow-rose-600/30 transition-all duration-300 flex items-center justify-center space-x-2 cursor-pointer">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Kirim Pendaftaran via WA & Simpan</span>
                     </button>
                 </div>
             </form>
@@ -524,14 +494,14 @@
                 <h3 class="font-bold text-base text-white flex items-center gap-2">
                     <i class="fa-solid fa-magnifying-glass text-rose-500"></i> Cek Status Pendaftaran & Pembayaran
                 </h3>
-                <button onclick="closeCheckStatusModal()" class="text-slate-400 hover:text-white text-sm"><i class="fa-solid fa-xmark"></i></button>
+                <button onclick="closeCheckStatusModal()" class="text-slate-400 hover:text-white text-sm cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
             <p class="text-xs text-slate-400 mb-4">Masukkan Nomor WhatsApp atau Nama Tim / Peserta Anda untuk memeriksa status pendaftaran:</p>
             
             <div class="flex gap-2 mb-4">
                 <input type="text" id="searchQueryInput" placeholder="Contoh: 081234567890 atau Nama Tim" class="w-full text-xs bg-slate-950/80 border border-slate-800 text-white px-3.5 py-2.5 rounded-xl focus:outline-none focus:border-rose-500">
-                <button onclick="searchRegistrationStatus()" class="bg-rose-600 hover:bg-rose-500 text-white font-semibold px-4 py-2.5 rounded-xl text-xs transition shrink-0">Cari</button>
+                <button onclick="searchRegistrationStatus()" class="bg-rose-600 hover:bg-rose-500 text-white font-semibold px-4 py-2.5 rounded-xl text-xs transition shrink-0 cursor-pointer">Cari</button>
             </div>
 
             <div id="searchResultContainer" class="space-y-3 text-xs">
@@ -539,7 +509,7 @@
             </div>
 
             <div class="mt-6 pt-4 border-t border-slate-800 text-right">
-                <button onclick="closeCheckStatusModal()" class="bg-slate-800 hover:bg-slate-750 text-white text-xs font-medium px-4 py-2 rounded-xl transition">Tutup</button>
+                <button onclick="closeCheckStatusModal()" class="bg-slate-800 hover:bg-slate-750 text-white text-xs font-medium px-4 py-2 rounded-xl transition cursor-pointer">Tutup</button>
             </div>
         </div>
     </div>
@@ -564,7 +534,6 @@
         let savedRegistrationKey = null; 
         let savedCategoryKey = null;
 
-        // Daftar harga masing-masing cabang lomba
         const BIAYA_LOMBA = {
             ml: "Rp 100.000",
             badminton: "Rp 100.000",
@@ -583,12 +552,12 @@
                 const priceTag = btn.querySelector('span:last-child');
                 
                 if(t === kategori) {
-                    btn.className = "lomba-tab flex flex-col items-center justify-center p-3.5 rounded-xl border transition-all duration-300 text-center bg-rose-500/10 border-rose-500/40 text-white font-semibold shadow-lg shadow-rose-950/30";
+                    btn.className = "lomba-tab flex flex-col items-center justify-center p-3.5 rounded-xl border transition-all duration-300 text-center bg-rose-500/10 border-rose-500/40 text-white font-semibold shadow-lg shadow-rose-950/30 cursor-pointer";
                     if(icon) icon.className = icon.className.replace('text-slate-500', 'text-rose-400');
                     if(priceTag) priceTag.className = "text-[10px] text-rose-300 mt-0.5";
                     if(form) form.classList.remove('hidden');
                 } else {
-                    btn.className = "lomba-tab flex flex-col items-center justify-center p-3.5 rounded-xl border border-transparent text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all duration-300 text-center font-medium";
+                    btn.className = "lomba-tab flex flex-col items-center justify-center p-3.5 rounded-xl border border-transparent text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all duration-300 text-center font-medium cursor-pointer";
                     if(icon) icon.className = icon.className.replace('text-rose-400', 'text-slate-500');
                     if(priceTag) priceTag.className = "text-[10px] text-slate-500 mt-0.5";
                     if(form) form.classList.add('hidden');
@@ -725,11 +694,11 @@
                 title.innerText = "Pendaftaran Berhasil Disimpan!";
                 
                 desc.innerHTML = `
-                    Data pendaftaran Anda telah tercat. Silakan transfer biaya pendaftaran sebesar <strong class="text-emerald-400 text-sm">${nominalBayar}</strong> ke rekening berikut:<br><br>
+                    Data pendaftaran Anda telah tercatat di Database. Silakan transfer biaya pendaftaran sebesar <strong class="text-emerald-400 text-sm">${nominalBayar}</strong> ke rekening berikut:<br><br>
                     <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-left text-slate-300 space-y-1 mb-2">
-                        <p><strong>🏦 SEABANK:</strong>90109356517</p>
-                        <p><strong>👤 A.N:</strong>Marsanda</p>
-                        <p><strong>📱 DANA / OVO:</strong> - </p>
+                        <p><strong>🏦 BANK BCA:</strong> 1234567890</p>
+                        <p><strong>👤 A.N:</strong> Panitia Dies Natalis HMS</p>
+                        <p><strong>📱 DANA / OVO:</strong> 081234567890</p>
                     </div>
                     Unggah foto bukti transfer Anda di bawah ini, lalu klik tombol konfirmasi.
                 `;
@@ -750,7 +719,7 @@
                 uploadSection.classList.add('hidden');
                 
                 actionArea.innerHTML = `
-                    <button type="button" onclick="closeModal()" class="w-full bg-rose-600 hover:bg-rose-500 text-white font-semibold py-3 px-4 rounded-xl block text-sm shadow-lg shadow-rose-950/40 transition-all">
+                    <button type="button" onclick="closeModal()" class="w-full bg-rose-600 hover:bg-rose-500 text-white font-semibold py-3 px-4 rounded-xl block text-sm shadow-lg shadow-rose-950/40 transition-all cursor-pointer">
                         Lengkapi Data Sekarang
                     </button>
                 `;
@@ -758,11 +727,11 @@
                 iconContainer.className = "w-14 h-14 rounded-2xl bg-rose-500/10 text-rose-400 border border-rose-500/20 flex items-center justify-center mx-auto mb-4 text-2xl";
                 icon.className = "fa-solid fa-triangle-exclamation";
                 title.innerText = "Pendaftaran Gagal Disimpan!";
-                desc.innerText = "Terjadi kendala saat menghubungkan ke server. Namun, Anda tetap bisa melanjutkan pembayaran secara manual.";
+                desc.innerText = "Terjadi kendala saat menghubungkan ke database server. Namun, Anda tetap bisa melanjutkan pembayaran secara manual.";
                 uploadSection.classList.add('hidden');
                 
                 actionArea.innerHTML = `
-                    <button type="button" onclick="closeModal()" class="w-full bg-slate-800 text-white font-medium py-2.5 rounded-xl text-xs">Tutup</button>
+                    <button type="button" onclick="closeModal()" class="w-full bg-slate-800 text-white font-medium py-2.5 rounded-xl text-xs cursor-pointer">Tutup</button>
                 `;
             }
 
