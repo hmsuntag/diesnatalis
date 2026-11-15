@@ -668,9 +668,8 @@
 
             newRef.set(payloadData)
                 .then(() => {
-                    // RESET FORM OTOMATIS SETELAH BERHASIL DISIMPAN
+                    // RESET FORM OTOMATIS SETELAH BERHASIL DISIMPAN KE DATABASE
                     document.getElementById('registrationForm').reset();
-                    
                     showStatusModal('success', activeLomba);
                 })
                 .catch((err) => {
@@ -709,7 +708,7 @@
 
                 actionArea.innerHTML = `
                     <button type="button" onclick="submitBuktiPembayaran()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 px-4 rounded-xl block text-sm shadow-lg shadow-emerald-950/40 transition-all flex items-center justify-center space-x-2 cursor-pointer">
-                        <span>Kirim & Konfirmasi via WhatsApp</span>
+                        <span>Kirim Bukti Transfer</span>
                     </button>
                 `;
             } else if (status === 'validation') {
@@ -764,8 +763,25 @@
                     // FORMAT WHATSAPP API UNIVERSAL (AMAN DI HP DAN LAPTOP)
                     const finalWaUrl = `https://api.whatsapp.com/send?phone=${PANITIA_WA}&text=${encodeURIComponent(waText)}`;
 
-                    closeModal();
-                    window.open(finalWaUrl, '_blank');
+                    // UBAH MODAL MENJADI TOMBOL LINK LANGSUNG (<a>) AGAR TIDAK DIBLOKIR POPUP BLOCKER DI HP
+                    const actionArea = document.getElementById('modalActionArea');
+                    const desc = document.getElementById('modalDesc');
+                    const uploadSection = document.getElementById('uploadSection');
+                    const title = document.getElementById('modalTitle');
+                    
+                    title.innerText = "Bukti Transfer Terkirim!";
+                    desc.innerHTML = `<strong class="text-emerald-400">Foto bukti transfer berhasil diunggah ke sistem!</strong><br>Silakan ketuk tombol di bawah ini untuk langsung mengirim pesan konfirmasi ke WhatsApp Panitia:`;
+                    uploadSection.classList.add('hidden');
+
+                    actionArea.innerHTML = `
+                        <a href="${finalWaUrl}" target="_blank" onclick="closeModal()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 px-4 rounded-xl block text-center text-sm shadow-lg shadow-emerald-950/40 transition-all flex items-center justify-center space-x-2">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>Buka WhatsApp Panitia Sekarang</span>
+                        </a>
+                        <button type="button" onclick="closeModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium py-2.5 rounded-xl text-xs cursor-pointer mt-2">
+                            Tutup Jendela Ini
+                        </button>
+                    `;
                 };
 
                 reader.readAsDataURL(file);
