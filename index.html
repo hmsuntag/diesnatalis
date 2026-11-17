@@ -56,6 +56,10 @@
                 radial-gradient(at 100% 100%, rgba(225, 29, 72, 0.08) 0px, transparent 50%),
                 radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.5) 0px, transparent 100%);
         }
+        /* Animasi Transisi Halus */
+        .transition-all-custom {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0B0F17; }
         ::-webkit-scrollbar-thumb { background: #2A364F; border-radius: 4px; }
@@ -89,23 +93,66 @@
                     <p class="text-[11px] text-slate-400 hidden sm:block">Himpunan Mahasiswa Sipil • Univ. 17 Agustus 1945</p>
                 </div>
             </div>
-            <div class="flex items-center space-x-2">
+            <div class="flex items-center space-x-3">
                 <button onclick="openCheckStatusModal()" class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs font-semibold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 cursor-pointer">
-                    <i class="fa-solid fa-magnifying-glass"></i> Cek Status Pendaftaran
+                    <i class="fa-solid fa-magnifying-glass"></i> Cek Status
                 </button>
+                
+                <!-- CONTAINER TEMPAT REGISTRATION OPEN ATAU PINDAHAN COUNTDOWN -->
+                <div id="navBadgeContainer">
+                    <span id="registrationBadge" class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20 shadow-inner">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-2"></span>
+                        Registration Open
+                    </span>
+                </div>
             </div>
         </div>
     </header>
 
+    <!-- POP-UP COUNTDOWN SAAT PERTAMA KALI BUKA WEBSITE -->
+    <div id="initialCountdownModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="glass-card rounded-2xl max-w-md w-full p-6 text-center shadow-2xl border border-slate-800 transform transition-all scale-100">
+            <div class="w-14 h-14 rounded-2xl bg-rose-500/10 text-rose-400 border border-rose-500/20 flex items-center justify-center mx-auto mb-4 text-2xl">
+                <i class="fa-solid fa-clock animate-pulse"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-1">Batas Waktu Pendaftaran</h3>
+            <p class="text-xs text-slate-400 mb-5">Pendaftaran ditutup pada hari Rabu pukul 12:00 WITA.</p>
+
+            <!-- KOTAK WAKTU MUNDUR DI POPUP -->
+            <div class="grid grid-cols-4 gap-2 mb-6 bg-slate-900/80 p-3.5 rounded-xl border border-slate-800">
+                <div class="text-center">
+                    <span id="popup-days" class="text-lg font-extrabold text-white">00</span>
+                    <p class="text-[10px] text-slate-400 uppercase">Hari</p>
+                </div>
+                <div class="text-center">
+                    <span id="popup-hours" class="text-lg font-extrabold text-white">00</span>
+                    <p class="text-[10px] text-slate-400 uppercase">Jam</p>
+                </div>
+                <div class="text-center">
+                    <span id="popup-minutes" class="text-lg font-extrabold text-white">00</span>
+                    <p class="text-[10px] text-slate-400 uppercase">Menit</p>
+                </div>
+                <div class="text-center">
+                    <span id="popup-seconds" class="text-lg font-extrabold text-white text-rose-400">00</span>
+                    <p class="text-[10px] text-slate-400 uppercase">Detik</p>
+                </div>
+            </div>
+
+            <button onclick="closeInitialPopupAndAnimate()" class="w-full bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-600 text-white font-semibold py-3 px-4 rounded-xl text-sm shadow-lg shadow-rose-950/40 transition-all cursor-pointer flex items-center justify-center gap-2">
+                <i class="fa-solid fa-arrow-right"></i> Tutup & Lanjutkan
+            </button>
+        </div>
+    </div>
+
     <!-- HERO SECTION -->
     <section class="py-10 sm:py-14 px-4 relative overflow-hidden">
         <div class="max-w-4xl mx-auto text-center relative z-10 flex flex-col items-center">
-            
             <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-rose-600 to-rose-400 flex items-center justify-center font-bold text-white shadow-xl shadow-rose-950/60 mb-5 border border-rose-400/30">
                 <i class="fa-solid fa-helmet-safety text-3xl"></i>
             </div>
 
             <div class="inline-flex items-center space-x-2 bg-slate-900/80 text-rose-400 text-xs font-semibold px-4 py-1.5 rounded-full border border-rose-500/20 mb-4 shadow-sm backdrop-blur-md">
+                <i class="fa-solid fa-star text-amber-400 text-xs"></i>
                 <span>DIES NATALIS HMS UNTAG SAMARINDA</span>
             </div>
             <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-4 text-white">
@@ -176,7 +223,6 @@
             </div>
 
             <form id="registrationForm" onsubmit="handleFormSubmit(event)">
-
                 <!-- 1. FORM MOBILE LEGENDS -->
                 <div id="form-ml" class="space-y-6">
                     <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-4">
@@ -186,23 +232,22 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-medium text-slate-300 mb-1.5">1. Nama Tim / Squad *</label>
-                                <input type="text" id="ml_nama_tim" placeholder="Contoh: HMS Titan Squad" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all">
+                                <input type="text" id="ml_nama_tim" placeholder="Contoh: HMS Titan Squad" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500">
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-300 mb-1.5">2. Asal Kampus / Jurusan / Instansi *</label>
-                                <input type="text" id="ml_instansi" placeholder="Contoh: UNTAG Samarinda / Teknik Sipil" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all">
+                                <input type="text" id="ml_instansi" placeholder="Contoh: UNTAG Samarinda / Teknik Sipil" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500">
                             </div>
                             <div class="md:col-span-2">
                                 <label class="block text-xs font-medium text-slate-300 mb-1.5">3. Nomor WhatsApp Penanggung Jawab *</label>
-                                <input type="tel" id="ml_whatsapp" placeholder="081234567890" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all">
+                                <input type="tel" id="ml_whatsapp" placeholder="081234567890" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500">
                             </div>
                         </div>
                     </div>
 
-                    <!-- Pemain 1 - Kapten -->
                     <div class="bg-slate-900/40 rounded-xl p-4 border border-slate-800 space-y-3">
                         <div class="font-semibold text-sm text-white flex items-center justify-between border-b border-slate-800 pb-2.5">
-                            <span class="flex items-center gap-2"> A. Data Pemain 1 (Kapten) *</span>
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-crown text-amber-400"></i> A. Data Pemain 1 (Kapten) *</span>
                             <span class="text-[10px] bg-amber-400/10 text-amber-300 font-semibold px-2 py-0.5 rounded border border-amber-400/20">Kapten</span>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -438,7 +483,8 @@
                         Pendaftaran aman & tersimpan otomatis ke Cloud Database.
                     </div>
                     <button type="submit" class="w-full sm:w-auto bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-600 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg shadow-rose-950/50 hover:shadow-rose-600/30 transition-all duration-300 flex items-center justify-center space-x-2 cursor-pointer">
-                        <span>Kirim Pendaftaran</span>
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Kirim Pendaftaran via WA & Simpan</span>
                     </button>
                 </div>
             </form>
@@ -520,7 +566,7 @@
         firebase.initializeApp(firebaseConfig);
         const rtdb = firebase.database();
 
-        const PANITIA_WA = "6282268137705"; 
+        const PANITIA_WA = "6281234567890"; 
         let activeLomba = 'ml';
         let savedRegistrationKey = null; 
         let savedCategoryKey = null;
@@ -531,6 +577,84 @@
             domino: "Rp 50.000",
             autocad: "Rp 80.000"
         };
+
+        // --- SKRIP HITUNG MUNDUR HINGGA HARI RABU JAM 12 SIANG ---
+        function getTargetWednesdayMidnight() {
+            const now = new Date();
+            const result = new Date(now);
+            let dayOfWeek = now.getDay(); // 0 = Minggu, 1 = Senin, ..., 3 = Rabu
+            let daysUntilWednesday = (3 - dayOfWeek + 7) % 7;
+            
+            if (daysUntilWednesday === 0 && now.getHours() >= 12) {
+                daysUntilWednesday = 7; // Jika sudah lewat Rabu jam 12 siang, target ke Rabu minggu depan
+            }
+            
+            result.setDate(now.getDate() + daysUntilWednesday);
+            result.setHours(12, 0, 0, 0); // Pukul 12:00 Siang
+            return result.getTime();
+        }
+
+        const targetTime = getTargetWednesdayMidnight();
+
+        function updateCountdownTimers() {
+            const now = new Date().getTime();
+            const distance = targetTime - now;
+
+            if (distance < 0) {
+                document.getElementById('popup-days').innerText = "00";
+                document.getElementById('popup-hours').innerText = "00";
+                document.getElementById('popup-minutes').innerText = "00";
+                document.getElementById('popup-seconds').innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            const formatNum = (num) => String(num).padStart(2, '0');
+
+            // Update di Popup
+            if(document.getElementById('popup-days')) {
+                document.getElementById('popup-days').innerText = formatNum(days);
+                document.getElementById('popup-hours').innerText = formatNum(hours);
+                document.getElementById('popup-minutes').innerText = formatNum(minutes);
+                document.getElementById('popup-seconds').innerText = formatNum(seconds);
+            }
+
+            // Update di Navbar setelah ditutup
+            const navCountdown = document.getElementById('navCountdownText');
+            if(navCountdown) {
+                navCountdown.innerText = `${days}h ${formatNum(hours)}j ${formatNum(minutes)}m ${formatNum(seconds)}d`;
+            }
+        }
+
+        setInterval(updateCountdownTimers, 1000);
+        updateCountdownTimers();
+
+        // Fungsi Tombol Tutup Pop-up & Animasi Berpindah ke Badge Navbar
+        function closeInitialPopupAndAnimate() {
+            const popup = document.getElementById('initialCountdownModal');
+            const badgeContainer = document.getElementById('navBadgeContainer');
+
+            // Efek Fade Out Pop-up
+            popup.style.opacity = '0';
+            popup.style.transform = 'scale(0.95)';
+            popup.style.transition = 'all 0.4s ease';
+
+            setTimeout(() => {
+                popup.classList.add('hidden');
+
+                // Mengubah badge "Registration Open" menimpa jadi countdown dengan animasi
+                badgeContainer.innerHTML = `
+                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold bg-rose-500/15 text-rose-400 border border-rose-500/40 shadow-lg animate-fade-in">
+                        <i class="fa-solid fa-clock text-amber-400"></i>
+                        <span>Tutup: <span id="navCountdownText" class="font-mono text-white">00h 00j 00m 00d</span></span>
+                    </div>
+                `;
+            }, 400);
+        }
 
         function switchLomba(kategori) {
             activeLomba = kategori;
@@ -660,8 +784,6 @@
 
             newRef.set(payloadData)
                 .then(() => {
-                    // RESET FORM OTOMATIS SETELAH BERHASIL DISIMPAN KE DATABASE
-                    document.getElementById('registrationForm').reset();
                     showStatusModal('success', activeLomba);
                 })
                 .catch((err) => {
@@ -687,45 +809,21 @@
                 title.innerText = "Pendaftaran Berhasil Disimpan!";
                 
                 desc.innerHTML = `
-                    Data pendaftaran Anda telah tercatat di Database dan formulir telah dikosongkan kembali. Silakan transfer biaya pendaftaran sebesar <strong class="text-emerald-400 text-sm">${nominalBayar}</strong> ke rekening berikut:<br><br>
+                    Data pendaftaran Anda telah tercatat di Database. Silakan transfer biaya pendaftaran sebesar <strong class="text-emerald-400 text-sm">${nominalBayar}</strong> ke rekening berikut:<br><br>
                     <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-left text-slate-300 space-y-1 mb-2">
-                        <p><strong>🏦 SEABANK:</strong> 901093565167</p>
-                        <p><strong>👤 A.N:</strong> Marshanda</p>
-                        <p><strong>📱 DANA / OVO:</strong> tidak tersedia saat ini</p>
+                        <p><strong>🏦 BANK BCA:</strong> 1234567890</p>
+                        <p><strong>👤 A.N:</strong> Panitia Dies Natalis HMS</p>
+                        <p><strong>📱 DANA / OVO:</strong> 081234567890</p>
                     </div>
-                    Unggah foto bukti transfer Anda di bawah ini, lalu klik tombol kirim.
+                    Unggah foto bukti transfer Anda di bawah ini, lalu klik tombol konfirmasi.
                 `;
                 
                 uploadSection.classList.remove('hidden');
 
                 actionArea.innerHTML = `
                     <button type="button" onclick="submitBuktiPembayaran()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 px-4 rounded-xl block text-sm shadow-lg shadow-emerald-950/40 transition-all flex items-center justify-center space-x-2 cursor-pointer">
-                        <span>Kirim Bukti Transfer</span>
-                    </button>
-                `;
-            } else if (status === 'completed') {
-                // POP-UP NOTIFIKASI KETIKA BUKTI PEMBAYARAN & PENDAFTARAN SELESAI
-                iconContainer.className = "w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center mx-auto mb-4 text-2xl";
-                icon.className = "fa-solid fa-circle-check";
-                title.innerText = "Pendaftaran Berhasil Sepenuhnya!";
-                
-                desc.innerHTML = `
-                    <strong class="text-emerald-400 text-sm">Selamat! Pendaftaran & Bukti Transfer Anda Berhasil Dikirim.</strong><br><br>
-                    Data Anda sudah masuk ke sistem panitia dan formulir telah di-reset. Silakan ketuk tombol di bawah ini untuk mengirim konfirmasi akhir ke WhatsApp Panitia:
-                `;
-                
-                uploadSection.classList.add('hidden');
-
-                const waText = `*KONFIRMASI PEMBAYARAN LOMBA (${savedCategoryKey.toUpperCase()})*\nBukti transfer telah diunggah dan pendaftaran telah berhasil. Mohon verifikasi, terima kasih!`;
-                const finalWaUrl = `https://api.whatsapp.com/send?phone=${PANITIA_WA}&text=${encodeURIComponent(waText)}`;
-
-                actionArea.innerHTML = `
-                    <a href="${finalWaUrl}" target="_blank" onclick="closeModal()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 px-4 rounded-xl block text-center text-sm shadow-lg shadow-emerald-950/40 transition-all flex items-center justify-center space-x-2">
                         <i class="fa-brands fa-whatsapp text-lg"></i>
-                        <span>Buka WhatsApp Panitia Sekarang</span>
-                    </a>
-                    <button type="button" onclick="closeModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium py-2.5 rounded-xl text-xs cursor-pointer mt-2">
-                        Tutup Jendela Ini
+                        <span>Kirim Konfirmasi & Bukti via WhatsApp</span>
                     </button>
                 `;
             } else if (status === 'validation') {
@@ -774,8 +872,12 @@
                         });
                     }
 
-                    // TAMPILKAN POP-UP NOTIFIKASI BAHWA PENDAFTARAN BERHASIL SEPENUHNYA
-                    showStatusModal('completed', savedCategoryKey);
+                    let nominal = BIAYA_LOMBA[savedCategoryKey] || "";
+                    let waText = `*KONFIRMASI PEMBAYARAN LOMBA (${savedCategoryKey.toUpperCase()})*\nNominal Transfer: ${nominal}\nBukti transfer telah diunggah ke sistem database panitia. Mohon verifikasi, terima kasih!`;
+                    const finalWaUrl = `https://wa.me/${PANITIA_WA}?text=${encodeURIComponent(waText)}`;
+
+                    closeModal();
+                    window.open(finalWaUrl, '_blank');
                 };
 
                 reader.readAsDataURL(file);
