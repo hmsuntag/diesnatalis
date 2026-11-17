@@ -483,8 +483,7 @@
                         Pendaftaran aman & tersimpan otomatis ke Cloud Database.
                     </div>
                     <button type="submit" class="w-full sm:w-auto bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-600 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg shadow-rose-950/50 hover:shadow-rose-600/30 transition-all duration-300 flex items-center justify-center space-x-2 cursor-pointer">
-                        <i class="fa-brands fa-whatsapp text-lg"></i>
-                        <span>Kirim Pendaftaran via WA & Simpan</span>
+                        <span>Kirim Pendaftaran</span>
                     </button>
                 </div>
             </form>
@@ -566,7 +565,7 @@
         firebase.initializeApp(firebaseConfig);
         const rtdb = firebase.database();
 
-        const PANITIA_WA = "6281234567890"; 
+        const PANITIA_WA = "6282268137705"; 
         let activeLomba = 'ml';
         let savedRegistrationKey = null; 
         let savedCategoryKey = null;
@@ -823,7 +822,7 @@
                 actionArea.innerHTML = `
                     <button type="button" onclick="submitBuktiPembayaran()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 px-4 rounded-xl block text-sm shadow-lg shadow-emerald-950/40 transition-all flex items-center justify-center space-x-2 cursor-pointer">
                         <i class="fa-brands fa-whatsapp text-lg"></i>
-                        <span>Kirim Konfirmasi & Bukti via WhatsApp</span>
+                        <span>Kirim Konfirmasi</span>
                     </button>
                 `;
             } else if (status === 'validation') {
