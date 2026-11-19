@@ -56,7 +56,6 @@
                 radial-gradient(at 100% 100%, rgba(225, 29, 72, 0.08) 0px, transparent 50%),
                 radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.5) 0px, transparent 100%);
         }
-        /* Animasi Transisi Halus */
         .transition-all-custom {
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -98,7 +97,6 @@
                     <i class="fa-solid fa-magnifying-glass"></i> Cek Status
                 </button>
                 
-                <!-- CONTAINER TEMPAT REGISTRATION OPEN ATAU PINDAHAN COUNTDOWN -->
                 <div id="navBadgeContainer">
                     <span id="registrationBadge" class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20 shadow-inner">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-2"></span>
@@ -108,41 +106,6 @@
             </div>
         </div>
     </header>
-
-    <!-- POP-UP COUNTDOWN SAAT PERTAMA KALI BUKA WEBSITE -->
-    <div id="initialCountdownModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
-        <div class="glass-card rounded-2xl max-w-md w-full p-6 text-center shadow-2xl border border-slate-800 transform transition-all scale-100">
-            <div class="w-14 h-14 rounded-2xl bg-rose-500/10 text-rose-400 border border-rose-500/20 flex items-center justify-center mx-auto mb-4 text-2xl">
-                <i class="fa-solid fa-clock animate-pulse"></i>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-1">Batas Waktu Pendaftaran</h3>
-            <p class="text-xs text-slate-400 mb-5">Pendaftaran ditutup pada hari Rabu pukul 12:00 WITA.</p>
-
-            <!-- KOTAK WAKTU MUNDUR DI POPUP -->
-            <div class="grid grid-cols-4 gap-2 mb-6 bg-slate-900/80 p-3.5 rounded-xl border border-slate-800">
-                <div class="text-center">
-                    <span id="popup-days" class="text-lg font-extrabold text-white">00</span>
-                    <p class="text-[10px] text-slate-400 uppercase">Hari</p>
-                </div>
-                <div class="text-center">
-                    <span id="popup-hours" class="text-lg font-extrabold text-white">00</span>
-                    <p class="text-[10px] text-slate-400 uppercase">Jam</p>
-                </div>
-                <div class="text-center">
-                    <span id="popup-minutes" class="text-lg font-extrabold text-white">00</span>
-                    <p class="text-[10px] text-slate-400 uppercase">Menit</p>
-                </div>
-                <div class="text-center">
-                    <span id="popup-seconds" class="text-lg font-extrabold text-white text-rose-400">00</span>
-                    <p class="text-[10px] text-slate-400 uppercase">Detik</p>
-                </div>
-            </div>
-
-            <button onclick="closeInitialPopupAndAnimate()" class="w-full bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-600 text-white font-semibold py-3 px-4 rounded-xl text-sm shadow-lg shadow-rose-950/40 transition-all cursor-pointer flex items-center justify-center gap-2">
-                <i class="fa-solid fa-arrow-right"></i> Tutup & Lanjutkan
-            </button>
-        </div>
-    </div>
 
     <!-- HERO SECTION -->
     <section class="py-10 sm:py-14 px-4 relative overflow-hidden">
@@ -162,7 +125,7 @@
                 </span>
             </h2>
             <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto font-normal leading-relaxed">
-                Tunjukkan bakat, sportivitas, dan raih prestasi. Pilih cabang lomba di bawah ini dan lengkapi formulir pendaftaran Anda secara langsung.
+                Tunjukkan bakat, sportivitas, dan raih prestasi. Pilih cabang lomba yang masih tersedia di bawah ini dan lengkapi formulir pendaftaran Anda secara langsung.
             </p>
         </div>
     </section>
@@ -174,24 +137,26 @@
         <div class="glass-card rounded-2xl overflow-hidden mb-6 p-2 sm:p-3">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-2" id="tab-buttons">
                 <button type="button" onclick="switchLomba('ml')" id="tab-ml" 
-                    class="lomba-tab flex flex-col items-center justify-center p-3.5 rounded-xl border transition-all duration-300 text-center bg-rose-500/10 border-rose-500/40 text-white font-semibold shadow-lg shadow-rose-950/30 cursor-pointer">
-                    <i class="fa-solid fa-gamepad text-xl mb-1.5 text-rose-400"></i>
-                    <span class="text-xs sm:text-sm">Mobile Legends</span>
-                    <span class="text-[10px] text-rose-300 mt-0.5">Rp 100.000</span>
+                    class="lomba-tab relative flex flex-col items-center justify-center p-3.5 rounded-xl border border-transparent text-slate-500 opacity-60 hover:opacity-80 transition-all duration-300 text-center font-medium cursor-pointer">
+                    <span class="absolute top-2 right-2 bg-rose-500/20 text-rose-400 border border-rose-500/30 text-[9px] font-bold px-1.5 py-0.5 rounded uppercase">Tutup</span>
+                    <i class="fa-solid fa-gamepad text-xl mb-1.5 text-slate-500"></i>
+                    <span class="text-xs sm:text-sm line-through">Mobile Legends</span>
+                    <span class="text-[10px] text-rose-400 mt-0.5">Pendaftaran Ditutup</span>
                 </button>
                 
                 <button type="button" onclick="switchLomba('badminton')" id="tab-badminton" 
-                    class="lomba-tab flex flex-col items-center justify-center p-3.5 rounded-xl border border-transparent text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all duration-300 text-center font-medium cursor-pointer">
+                    class="lomba-tab relative flex flex-col items-center justify-center p-3.5 rounded-xl border border-transparent text-slate-500 opacity-60 hover:opacity-80 transition-all duration-300 text-center font-medium cursor-pointer">
+                    <span class="absolute top-2 right-2 bg-rose-500/20 text-rose-400 border border-rose-500/30 text-[9px] font-bold px-1.5 py-0.5 rounded uppercase">Tutup</span>
                     <i class="fa-solid fa-table-tennis-paddle-ball text-xl mb-1.5 text-slate-500"></i>
-                    <span class="text-xs sm:text-sm">Badminton</span>
-                    <span class="text-[10px] text-slate-500 mt-0.5">Rp 100.000</span>
+                    <span class="text-xs sm:text-sm line-through">Badminton</span>
+                    <span class="text-[10px] text-rose-400 mt-0.5">Pendaftaran Ditutup</span>
                 </button>
 
                 <button type="button" onclick="switchLomba('domino')" id="tab-domino" 
-                    class="lomba-tab flex flex-col items-center justify-center p-3.5 rounded-xl border border-transparent text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all duration-300 text-center font-medium cursor-pointer">
-                    <i class="fa-solid fa-dice-five text-xl mb-1.5 text-slate-500"></i>
+                    class="lomba-tab flex flex-col items-center justify-center p-3.5 rounded-xl border transition-all duration-300 text-center bg-rose-500/10 border-rose-500/40 text-white font-semibold shadow-lg shadow-rose-950/30 cursor-pointer">
+                    <i class="fa-solid fa-dice-five text-xl mb-1.5 text-rose-400"></i>
                     <span class="text-xs sm:text-sm">Domino</span>
-                    <span class="text-[10px] text-slate-500 mt-0.5">Rp 50.000</span>
+                    <span class="text-[10px] text-rose-300 mt-0.5">Rp 50.000</span>
                 </button>
 
                 <button type="button" onclick="switchLomba('autocad')" id="tab-autocad" 
@@ -208,189 +173,50 @@
             <div class="border-b border-slate-800 pb-5 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
                     <h3 class="text-xl font-bold text-white flex items-center gap-2" id="form-title">
-                        Formulir Pendaftaran Mobile Legends
+                        Formulir Pendaftaran Lomba Domino
                     </h3>
-                    <p class="text-xs text-slate-400 mt-1" id="form-subtitle">Lengkapi seluruh data squad dan anggota pemain di bawah ini.</p>
+                    <p class="text-xs text-slate-400 mt-1" id="form-subtitle">Lengkapi data pasangan pemain domino Anda.</p>
                 </div>
                 <div class="flex items-center gap-2">
                     <span id="badge-price" class="bg-emerald-500/10 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full border border-emerald-500/20">
-                        Biaya: Rp 100.000
+                        Biaya: Rp 50.000
                     </span>
                     <span id="badge-category" class="bg-rose-500/10 text-rose-300 text-xs font-semibold px-3 py-1 rounded-full border border-rose-500/20 hidden sm:inline-block">
-                        Squad / Tim
+                        Pasangan (2 Orang)
                     </span>
                 </div>
             </div>
 
             <form id="registrationForm" onsubmit="handleFormSubmit(event)">
-                <!-- 1. FORM MOBILE LEGENDS -->
-                <div id="form-ml" class="space-y-6">
-                    <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-4">
-                        <h4 class="font-semibold text-rose-400 text-xs tracking-wider uppercase flex items-center gap-2">
-                            <i class="fa-solid fa-users text-rose-400"></i> Informasi Squad & Kontak Utama
-                        </h4>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-medium text-slate-300 mb-1.5">1. Nama Tim / Squad *</label>
-                                <input type="text" id="ml_nama_tim" placeholder="Contoh: HMS Titan Squad" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-300 mb-1.5">2. Asal Kampus / Jurusan / Instansi *</label>
-                                <input type="text" id="ml_instansi" placeholder="Contoh: UNTAG Samarinda / Teknik Sipil" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500">
-                            </div>
-                            <div class="md:col-span-2">
-                                <label class="block text-xs font-medium text-slate-300 mb-1.5">3. Nomor WhatsApp Penanggung Jawab *</label>
-                                <input type="tel" id="ml_whatsapp" placeholder="081234567890" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500">
-                            </div>
-                        </div>
+                <!-- PESAN PENDAFTARAN DITUTUP (UNTUK ML & BADMINTON) -->
+                <div id="form-closed-notice" class="hidden py-10 px-4 text-center bg-slate-900/60 rounded-2xl border border-rose-500/20 space-y-4">
+                    <div class="w-16 h-16 rounded-2xl bg-rose-500/10 text-rose-400 border border-rose-500/20 flex items-center justify-center mx-auto text-3xl">
+                        <i class="fa-solid fa-lock"></i>
                     </div>
-
-                    <div class="bg-slate-900/40 rounded-xl p-4 border border-slate-800 space-y-3">
-                        <div class="font-semibold text-sm text-white flex items-center justify-between border-b border-slate-800 pb-2.5">
-                            <span class="flex items-center gap-2"><i class="fa-solid fa-crown text-amber-400"></i> A. Data Pemain 1 (Kapten) *</span>
-                            <span class="text-[10px] bg-amber-400/10 text-amber-300 font-semibold px-2 py-0.5 rounded border border-amber-400/20">Kapten</span>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Nama Lengkap *</label>
-                                <input type="text" id="ml_p1_nama" class="w-full text-sm px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-800 text-white focus:border-rose-500 focus:outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Nickname In-Game *</label>
-                                <input type="text" id="ml_p1_nick" class="w-full text-sm px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-800 text-white focus:border-rose-500 focus:outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">ID & Server MLBB *</label>
-                                <input type="text" id="ml_p1_id" placeholder="12345678 (1234)" class="w-full text-sm px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-800 text-white focus:border-rose-500 focus:outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Role Utama *</label>
-                                <select id="ml_p1_role" class="w-full text-sm px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-800 text-white focus:border-rose-500 focus:outline-none">
-                                    <option value="">Pilih Role</option>
-                                    <option value="EXP Laner">EXP Laner</option>
-                                    <option value="Gold Laner">Gold Laner</option>
-                                    <option value="Mid Laner">Mid Laner</option>
-                                    <option value="Jungler">Jungler</option>
-                                    <option value="Roamer">Roamer</option>
-                                </select>
-                            </div>
-                        </div>
+                    <div>
+                        <h4 class="text-lg font-bold text-white" id="closed-lomba-title">Pendaftaran Lomba Ditutup</h4>
+                        <p class="text-xs text-slate-400 max-w-md mx-auto mt-1.5 leading-relaxed">
+                            Mohon maaf, kuota dan waktu pendaftaran untuk cabang lomba ini telah resmi ditutup oleh panitia. Silakan pilih cabang lomba <strong class="text-rose-400">Domino</strong> atau <strong class="text-rose-400">AutoCAD</strong> yang masih dibuka.
+                        </p>
                     </div>
-
-                    <script>
-                        function generateMLPlayerFields(num, letter, isRequired = true) {
-                            return `
-                            <div class="bg-slate-900/40 rounded-xl p-4 border border-slate-800 space-y-3">
-                                <div class="font-semibold text-sm text-slate-200 border-b border-slate-800 pb-2.5">
-                                    ${letter}. Data Pemain ${num} ${isRequired ? '*' : '<span class="text-xs text-slate-500 font-normal">(Opsional)</span>'}
-                                </div>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                    <div>
-                                        <label class="block text-xs font-medium text-slate-400 mb-1">Nama Lengkap ${isRequired ? '*' : ''}</label>
-                                        <input type="text" id="ml_p${num}_nama" class="w-full text-sm px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-800 text-white focus:border-rose-500 focus:outline-none">
-                                    </div>
-                                    <div>
-                                        <label class="block text-xs font-medium text-slate-400 mb-1">Nickname In-Game ${isRequired ? '*' : ''}</label>
-                                        <input type="text" id="ml_p${num}_nick" class="w-full text-sm px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-800 text-white focus:border-rose-500 focus:outline-none">
-                                    </div>
-                                    <div>
-                                        <label class="block text-xs font-medium text-slate-400 mb-1">ID & Server MLBB ${isRequired ? '*' : ''}</label>
-                                        <input type="text" id="ml_p${num}_id" placeholder="12345678 (1234)" class="w-full text-sm px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-800 text-white focus:border-rose-500 focus:outline-none">
-                                    </div>
-                                    <div>
-                                        <label class="block text-xs font-medium text-slate-400 mb-1">Role Utama ${isRequired ? '*' : ''}</label>
-                                        <select id="ml_p${num}_role" class="w-full text-sm px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-800 text-white focus:border-rose-500 focus:outline-none">
-                                            <option value="">Pilih Role</option>
-                                            <option value="EXP Laner">EXP Laner</option>
-                                            <option value="Gold Laner">Gold Laner</option>
-                                            <option value="Mid Laner">Mid Laner</option>
-                                            <option value="Jungler">Jungler</option>
-                                            <option value="Roamer">Roamer</option>
-                                            <option value="All Role">All Role</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>`;
-                        }
-                    </script>
-
-                    <div id="ml-players-container" class="space-y-4">
-                        <script>
-                            document.write(generateMLPlayerFields(2, 'B', true));
-                            document.write(generateMLPlayerFields(3, 'C', true));
-                            document.write(generateMLPlayerFields(4, 'D', true));
-                            document.write(generateMLPlayerFields(5, 'E', true));
-                            document.write(generateMLPlayerFields('Cadangan', 'F', false));
-                        </script>
+                    <div class="pt-2 flex flex-wrap justify-center gap-2">
+                        <button type="button" onclick="switchLomba('domino')" class="bg-rose-600 hover:bg-rose-500 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition cursor-pointer">
+                            Daftar Lomba Domino
+                        </button>
+                        <button type="button" onclick="switchLomba('autocad')" class="bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition cursor-pointer">
+                            Daftar Lomba AutoCAD
+                        </button>
                     </div>
                 </div>
 
-                <!-- 2. FORM BADMINTON -->
-                <div id="form-badminton" class="space-y-6 hidden">
-                    <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
-                        <label class="block text-xs font-medium text-slate-300 mb-1.5">1. Nama Tim / Pasangan *</label>
-                        <input type="text" id="bad_nama_tim" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500" placeholder="Contoh: Ganda Sipil A">
-                    </div>
+                <!-- 1. FORM MOBILE LEGENDS (DITUTUP) -->
+                <div id="form-ml" class="space-y-6 hidden"></div>
 
-                    <div class="bg-slate-900/40 rounded-xl p-4 border border-slate-800 space-y-3">
-                        <div class="font-semibold text-sm text-slate-200 border-b border-slate-800 pb-2 flex items-center gap-2">
-                            <i class="fa-solid fa-user text-rose-400"></i> A. Data Pemain 1 *
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Nama Lengkap *</label>
-                                <input type="text" id="bad_p1_nama" class="w-full text-sm px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-800 text-white focus:border-rose-500 focus:outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Nama Panggilan / Punggung *</label>
-                                <input type="text" id="bad_p1_punggung" class="w-full text-sm px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-800 text-white focus:border-rose-500 focus:outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Tempat, Tanggal Lahir *</label>
-                                <input type="text" id="bad_p1_ttl" placeholder="Samarinda, 17 Agustus 2002" class="w-full text-sm px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-800 text-white focus:border-rose-500 focus:outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Nomor WhatsApp *</label>
-                                <input type="tel" id="bad_p1_wa" placeholder="081234567890" class="w-full text-sm px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-800 text-white focus:border-rose-500 focus:outline-none">
-                            </div>
-                            <div class="md:col-span-2">
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Asal Kampus / Jurusan / Instansi *</label>
-                                <input type="text" id="bad_p1_instansi" placeholder="UNTAG Samarinda / Teknik Sipil" class="w-full text-sm px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-800 text-white focus:border-rose-500 focus:outline-none">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-900/40 rounded-xl p-4 border border-slate-800 space-y-3">
-                        <div class="font-semibold text-sm text-slate-200 border-b border-slate-800 pb-2 flex items-center gap-2">
-                            <i class="fa-solid fa-user text-rose-400"></i> B. Data Pemain 2 *
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Nama Lengkap *</label>
-                                <input type="text" id="bad_p2_nama" class="w-full text-sm px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-800 text-white focus:border-rose-500 focus:outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Nama Panggilan / Punggung *</label>
-                                <input type="text" id="bad_p2_punggung" class="w-full text-sm px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-800 text-white focus:border-rose-500 focus:outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Tempat, Tanggal Lahir *</label>
-                                <input type="text" id="bad_p2_ttl" placeholder="Samarinda, 20 Mei 2003" class="w-full text-sm px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-800 text-white focus:border-rose-500 focus:outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Nomor WhatsApp *</label>
-                                <input type="tel" id="bad_p2_wa" placeholder="081234567890" class="w-full text-sm px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-800 text-white focus:border-rose-500 focus:outline-none">
-                            </div>
-                            <div class="md:col-span-2">
-                                <label class="block text-xs font-medium text-slate-400 mb-1">Asal Kampus / Jurusan / Instansi *</label>
-                                <input type="text" id="bad_p2_instansi" placeholder="UNTAG Samarinda / Teknik Sipil" class="w-full text-sm px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-800 text-white focus:border-rose-500 focus:outline-none">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- 2. FORM BADMINTON (DITUTUP) -->
+                <div id="form-badminton" class="space-y-6 hidden"></div>
 
                 <!-- 3. FORM DOMINO -->
-                <div id="form-domino" class="space-y-6 hidden">
+                <div id="form-domino" class="space-y-6">
                     <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
                         <label class="block text-xs font-medium text-slate-300 mb-1.5">Nama Tim / Pasangan *</label>
                         <input type="text" id="dom_nama_tim" class="w-full text-sm px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500" placeholder="Contoh: Domino Duo Sipil">
@@ -477,7 +303,7 @@
                 </div>
 
                 <!-- SUBMIT BUTTON AREA -->
-                <div class="pt-6 border-t border-slate-800 mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div id="submit-area" class="pt-6 border-t border-slate-800 mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div class="text-xs text-slate-400 flex items-center">
                         <i class="fa-solid fa-shield-halved text-rose-400 mr-2 text-sm"></i>
                         Pendaftaran aman & tersimpan otomatis ke Cloud Database.
@@ -566,7 +392,8 @@
         const rtdb = firebase.database();
 
         const PANITIA_WA = "6282268137705"; 
-        let activeLomba = 'ml';
+        const CLOSED_LOMBA = ['ml', 'badminton'];
+        let activeLomba = 'domino';
         let savedRegistrationKey = null; 
         let savedCategoryKey = null;
 
@@ -577,86 +404,9 @@
             autocad: "Rp 80.000"
         };
 
-        // --- SKRIP HITUNG MUNDUR HINGGA HARI RABU JAM 12 SIANG ---
-        function getTargetWednesdayMidnight() {
-            const now = new Date();
-            const result = new Date(now);
-            let dayOfWeek = now.getDay(); // 0 = Minggu, 1 = Senin, ..., 3 = Rabu
-            let daysUntilWednesday = (3 - dayOfWeek + 7) % 7;
-            
-            if (daysUntilWednesday === 0 && now.getHours() >= 12) {
-                daysUntilWednesday = 7; // Jika sudah lewat Rabu jam 12 siang, target ke Rabu minggu depan
-            }
-            
-            result.setDate(now.getDate() + daysUntilWednesday);
-            result.setHours(12, 0, 0, 0); // Pukul 12:00 Siang
-            return result.getTime();
-        }
-
-        const targetTime = getTargetWednesdayMidnight();
-
-        function updateCountdownTimers() {
-            const now = new Date().getTime();
-            const distance = targetTime - now;
-
-            if (distance < 0) {
-                document.getElementById('popup-days').innerText = "00";
-                document.getElementById('popup-hours').innerText = "00";
-                document.getElementById('popup-minutes').innerText = "00";
-                document.getElementById('popup-seconds').innerText = "00";
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            const formatNum = (num) => String(num).padStart(2, '0');
-
-            // Update di Popup
-            if(document.getElementById('popup-days')) {
-                document.getElementById('popup-days').innerText = formatNum(days);
-                document.getElementById('popup-hours').innerText = formatNum(hours);
-                document.getElementById('popup-minutes').innerText = formatNum(minutes);
-                document.getElementById('popup-seconds').innerText = formatNum(seconds);
-            }
-
-            // Update di Navbar setelah ditutup
-            const navCountdown = document.getElementById('navCountdownText');
-            if(navCountdown) {
-                navCountdown.innerText = `${days}h ${formatNum(hours)}j ${formatNum(minutes)}m ${formatNum(seconds)}d`;
-            }
-        }
-
-        setInterval(updateCountdownTimers, 1000);
-        updateCountdownTimers();
-
-        // Fungsi Tombol Tutup Pop-up & Animasi Berpindah ke Badge Navbar
-        function closeInitialPopupAndAnimate() {
-            const popup = document.getElementById('initialCountdownModal');
-            const badgeContainer = document.getElementById('navBadgeContainer');
-
-            // Efek Fade Out Pop-up
-            popup.style.opacity = '0';
-            popup.style.transform = 'scale(0.95)';
-            popup.style.transition = 'all 0.4s ease';
-
-            setTimeout(() => {
-                popup.classList.add('hidden');
-
-                // Mengubah badge "Registration Open" menimpa jadi countdown dengan animasi
-                badgeContainer.innerHTML = `
-                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold bg-rose-500/15 text-rose-400 border border-rose-500/40 shadow-lg animate-fade-in">
-                        <i class="fa-solid fa-clock text-amber-400"></i>
-                        <span>Tutup: <span id="navCountdownText" class="font-mono text-white">00h 00j 00m 00d</span></span>
-                    </div>
-                `;
-            }, 400);
-        }
-
         function switchLomba(kategori) {
             activeLomba = kategori;
+            const isClosed = CLOSED_LOMBA.includes(kategori);
             
             const tabs = ['ml', 'badminton', 'domino', 'autocad'];
             tabs.forEach(t => {
@@ -664,16 +414,25 @@
                 const form = document.getElementById(`form-${t}`);
                 const icon = btn.querySelector('i');
                 const priceTag = btn.querySelector('span:last-child');
+                const tabIsClosed = CLOSED_LOMBA.includes(t);
                 
                 if(t === kategori) {
-                    btn.className = "lomba-tab flex flex-col items-center justify-center p-3.5 rounded-xl border transition-all duration-300 text-center bg-rose-500/10 border-rose-500/40 text-white font-semibold shadow-lg shadow-rose-950/30 cursor-pointer";
-                    if(icon) icon.className = icon.className.replace('text-slate-500', 'text-rose-400');
-                    if(priceTag) priceTag.className = "text-[10px] text-rose-300 mt-0.5";
-                    if(form) form.classList.remove('hidden');
+                    if (tabIsClosed) {
+                        btn.className = "lomba-tab relative flex flex-col items-center justify-center p-3.5 rounded-xl border transition-all duration-300 text-center bg-slate-900/80 border-rose-500/40 text-slate-300 font-semibold cursor-pointer";
+                    } else {
+                        btn.className = "lomba-tab flex flex-col items-center justify-center p-3.5 rounded-xl border transition-all duration-300 text-center bg-rose-500/10 border-rose-500/40 text-white font-semibold shadow-lg shadow-rose-950/30 cursor-pointer";
+                        if(icon) icon.className = icon.className.replace('text-slate-500', 'text-rose-400');
+                        if(priceTag) priceTag.className = "text-[10px] text-rose-300 mt-0.5";
+                    }
+                    if(form && !tabIsClosed) form.classList.remove('hidden');
                 } else {
-                    btn.className = "lomba-tab flex flex-col items-center justify-center p-3.5 rounded-xl border border-transparent text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all duration-300 text-center font-medium cursor-pointer";
-                    if(icon) icon.className = icon.className.replace('text-rose-400', 'text-slate-500');
-                    if(priceTag) priceTag.className = "text-[10px] text-slate-500 mt-0.5";
+                    if (tabIsClosed) {
+                        btn.className = "lomba-tab relative flex flex-col items-center justify-center p-3.5 rounded-xl border border-transparent text-slate-500 opacity-60 hover:opacity-80 transition-all duration-300 text-center font-medium cursor-pointer";
+                    } else {
+                        btn.className = "lomba-tab flex flex-col items-center justify-center p-3.5 rounded-xl border border-transparent text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all duration-300 text-center font-medium cursor-pointer";
+                        if(icon) icon.className = icon.className.replace('text-rose-400', 'text-slate-500');
+                        if(priceTag) priceTag.className = "text-[10px] text-slate-500 mt-0.5";
+                    }
                     if(form) form.classList.add('hidden');
                 }
             });
@@ -682,25 +441,42 @@
             const subTitleEl = document.getElementById('form-subtitle');
             const badgeEl = document.getElementById('badge-category');
             const badgePriceEl = document.getElementById('badge-price');
+            const closedNotice = document.getElementById('form-closed-notice');
+            const closedTitle = document.getElementById('closed-lomba-title');
+            const submitArea = document.getElementById('submit-area');
 
-            badgePriceEl.innerText = `Biaya: ${BIAYA_LOMBA[kategori]}`;
+            if (isClosed) {
+                closedNotice.classList.remove('hidden');
+                submitArea.classList.add('hidden');
+                badgePriceEl.className = "bg-rose-500/10 text-rose-400 text-xs font-bold px-3 py-1 rounded-full border border-rose-500/20";
+                badgePriceEl.innerText = "Status: Ditutup";
 
-            if (kategori === 'ml') {
-                titleEl.innerText = "Formulir Pendaftaran Mobile Legends";
-                subTitleEl.innerText = "Lengkapi data 5 Pemain Utama + 1 Pemain Cadangan.";
-                badgeEl.innerText = "Squad / Tim (5-6 Orang)";
-            } else if (kategori === 'badminton') {
-                titleEl.innerText = "Formulir Pendaftaran Badminton (Ganda)";
-                subTitleEl.innerText = "Lengkapi data tim pasangan ganda badminton Anda.";
-                badgeEl.innerText = "Ganda / Pasangan (2 Orang)";
-            } else if (kategori === 'domino') {
-                titleEl.innerText = "Formulir Pendaftaran Lomba Domino";
-                subTitleEl.innerText = "Lengkapi data pasangan pemain domino Anda.";
-                badgeEl.innerText = "Pasangan (2 Orang)";
-            } else if (kategori === 'autocad') {
-                titleEl.innerText = "Formulir Pendaftaran Lomba AutoCAD";
-                subTitleEl.innerText = "Lengkapi data perseorangan peserta lomba AutoCAD.";
-                badgeEl.innerText = "Individu";
+                if (kategori === 'ml') {
+                    titleEl.innerText = "Pendaftaran Mobile Legends";
+                    subTitleEl.innerText = "Pendaftaran untuk cabang lomba Mobile Legends telah ditutup.";
+                    closedTitle.innerText = "Pendaftaran Mobile Legends Ditutup";
+                    badgeEl.innerText = "Squad / Tim";
+                } else if (kategori === 'badminton') {
+                    titleEl.innerText = "Pendaftaran Badminton (Ganda)";
+                    subTitleEl.innerText = "Pendaftaran untuk cabang lomba Badminton telah ditutup.";
+                    closedTitle.innerText = "Pendaftaran Badminton Ditutup";
+                    badgeEl.innerText = "Ganda / Pasangan";
+                }
+            } else {
+                closedNotice.classList.add('hidden');
+                submitArea.classList.remove('hidden');
+                badgePriceEl.className = "bg-emerald-500/10 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full border border-emerald-500/20";
+                badgePriceEl.innerText = `Biaya: ${BIAYA_LOMBA[kategori]}`;
+
+                if (kategori === 'domino') {
+                    titleEl.innerText = "Formulir Pendaftaran Lomba Domino";
+                    subTitleEl.innerText = "Lengkapi data pasangan pemain domino Anda.";
+                    badgeEl.innerText = "Pasangan (2 Orang)";
+                } else if (kategori === 'autocad') {
+                    titleEl.innerText = "Formulir Pendaftaran Lomba AutoCAD";
+                    subTitleEl.innerText = "Lengkapi data perseorangan peserta lomba AutoCAD.";
+                    badgeEl.innerText = "Individu";
+                }
             }
         }
 
@@ -712,24 +488,12 @@
         function handleFormSubmit(e) {
             e.preventDefault();
 
-            if (activeLomba === 'ml') {
-                if (!getValue('ml_nama_tim') || !getValue('ml_instansi') || !getValue('ml_whatsapp') || 
-                    !getValue('ml_p1_nama') || !getValue('ml_p1_nick') || !getValue('ml_p1_id') || !getValue('ml_p1_role') ||
-                    !getValue('ml_p2_nama') || !getValue('ml_p2_nick') || !getValue('ml_p2_id') || !getValue('ml_p2_role') ||
-                    !getValue('ml_p3_nama') || !getValue('ml_p3_nick') || !getValue('ml_p3_id') || !getValue('ml_p3_role') ||
-                    !getValue('ml_p4_nama') || !getValue('ml_p4_nick') || !getValue('ml_p4_id') || !getValue('ml_p4_role') ||
-                    !getValue('ml_p5_nama') || !getValue('ml_p5_nick') || !getValue('ml_p5_id') || !getValue('ml_p5_role')) {
-                    showStatusModal('validation', '');
-                    return;
-                }
-            } else if (activeLomba === 'badminton') {
-                if (!getValue('bad_nama_tim') || 
-                    !getValue('bad_p1_nama') || !getValue('bad_p1_punggung') || !getValue('bad_p1_ttl') || !getValue('bad_p1_wa') || !getValue('bad_p1_instansi') ||
-                    !getValue('bad_p2_nama') || !getValue('bad_p2_punggung') || !getValue('bad_p2_ttl') || !getValue('bad_p2_wa') || !getValue('bad_p2_instansi')) {
-                    showStatusModal('validation', '');
-                    return;
-                }
-            } else if (activeLomba === 'domino') {
+            if (CLOSED_LOMBA.includes(activeLomba)) {
+                alert("Maaf, pendaftaran untuk cabang lomba ini sudah ditutup.");
+                return;
+            }
+
+            if (activeLomba === 'domino') {
                 if (!getValue('dom_nama_tim') || 
                     !getValue('dom_p1_nama') || !getValue('dom_p1_panggilan') || !getValue('dom_p1_wa') || !getValue('dom_p1_angkatan') ||
                     !getValue('dom_p2_nama') || !getValue('dom_p2_panggilan') || !getValue('dom_p2_wa') || !getValue('dom_p2_angkatan')) {
@@ -750,21 +514,7 @@
                 statusPembayaran: "Menunggu Bukti Transfer" 
             };
 
-            if (activeLomba === 'ml') {
-                payloadData.namaTim = getValue('ml_nama_tim');
-                payloadData.instansi = getValue('ml_instansi');
-                payloadData.whatsapp = getValue('ml_whatsapp');
-                payloadData.pemain1 = { nama: getValue('ml_p1_nama'), nick: getValue('ml_p1_nick'), id: getValue('ml_p1_id'), role: getValue('ml_p1_role') };
-                payloadData.pemain2 = { nama: getValue('ml_p2_nama'), nick: getValue('ml_p2_nick'), id: getValue('ml_p2_id'), role: getValue('ml_p2_role') };
-                payloadData.pemain3 = { nama: getValue('ml_p3_nama'), nick: getValue('ml_p3_nick'), id: getValue('ml_p3_id'), role: getValue('ml_p3_role') };
-                payloadData.pemain4 = { nama: getValue('ml_p4_nama'), nick: getValue('ml_p4_nick'), id: getValue('ml_p4_id'), role: getValue('ml_p4_role') };
-                payloadData.pemain5 = { nama: getValue('ml_p5_nama'), nick: getValue('ml_p5_nick'), id: getValue('ml_p5_id'), role: getValue('ml_p5_role') };
-                payloadData.cadangan = { nama: getValue('ml_pCadangan_nama'), nick: getValue('ml_pCadangan_nick'), id: getValue('ml_pCadangan_id'), role: getValue('ml_pCadangan_role') };
-            } else if (activeLomba === 'badminton') {
-                payloadData.namaTim = getValue('bad_nama_tim');
-                payloadData.pemain1 = { nama: getValue('bad_p1_nama'), punggung: getValue('bad_p1_punggung'), ttl: getValue('bad_p1_ttl'), wa: getValue('bad_p1_wa'), instansi: getValue('bad_p1_instansi') };
-                payloadData.pemain2 = { nama: getValue('bad_p2_nama'), punggung: getValue('bad_p2_punggung'), ttl: getValue('bad_p2_ttl'), wa: getValue('bad_p2_wa'), instansi: getValue('bad_p2_instansi') };
-            } else if (activeLomba === 'domino') {
+            if (activeLomba === 'domino') {
                 payloadData.namaTim = getValue('dom_nama_tim');
                 payloadData.pemain1 = { nama: getValue('dom_p1_nama'), panggilan: getValue('dom_p1_panggilan'), wa: getValue('dom_p1_wa'), angkatan: getValue('dom_p1_angkatan') };
                 payloadData.pemain2 = { nama: getValue('dom_p2_nama'), panggilan: getValue('dom_p2_panggilan'), wa: getValue('dom_p2_wa'), angkatan: getValue('dom_p2_angkatan') };
@@ -811,7 +561,7 @@
                     Data pendaftaran Anda telah tercatat di Database. Silakan transfer biaya pendaftaran sebesar <strong class="text-emerald-400 text-sm">${nominalBayar}</strong> ke rekening berikut:<br><br>
                     <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-left text-slate-300 space-y-1 mb-2">
                         <p><strong>🏦 SEABANK:</strong> 901093565167</p>
-                        <p><strong>👤 A.N:</strong>Marsanda</p>
+                        <p><strong>👤 A.N:</strong> Marsanda</p>
                         <p><strong>📱 DANA / OVO:</strong> TIDAK TERSEDIA</p>
                     </div>
                     Unggah foto bukti transfer Anda di bawah ini, lalu klik tombol konfirmasi.
